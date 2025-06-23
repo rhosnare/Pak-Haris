@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="assets/logo.png" />
+  <title>Produk | Adrise</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #111;
+      color: #eee;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(26, 26, 26, 0.75);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 1rem;
+      position: relative;
+
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #ffd54f;
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    .cart-icon {
+      position: relative;
+    }
+    #cart-count {
+      position: absolute;
+      top: -10px;
+      right: -12px;
+      background: red;
+      color: white;
+      font-size: 0.7rem;
+      padding: 3px 6px;
+      border-radius: 50%;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #ffd54f;
+      margin-bottom: 2rem;
+    }
+    #searchInput {
+      display: block;
+      margin: 0 auto 2rem auto;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      border: none;
+      width: 300px;
+      font-size: 1rem;
+    }
+    .produk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .produk-card {
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(255, 213, 79, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .produk-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(255, 213, 79, 0.4);
+    }
+    .produk-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .produk-card h3 {
+      color: #f9a825;
+      margin: 0.5rem 0;
+    }
+    .produk-card .harga {
+      color: #ffd54f;
+      font-weight: bold;
+    }
+    .produk-card .deskripsi {
+      font-size: 0.9rem;
+      color: #bbb;
+      margin: 0.5rem 0 1rem;
+    }
+    .produk-card a,
+    .produk-card button {
+      padding: 0.6rem 1rem;
+      margin: 0.2rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    .btn-detail {
+      background: transparent;
+      color: #ffd54f;
+      border: 1px solid #ffd54f;
+      transition: color 0.3s ease, border-bottom 0.3s ease;
+      position: relative;
+    }
+    
+    .btn-detail:hover {
+      color: #fff;
+    }
+    .btn-cart {
+      background: #f9a825;
+      color: #121212;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo" style="font-size: 1.5rem; font-weight: bold; color: #ffd54f; letter-spacing: 1px;">Adrise<span style="color: #f9a825;">.</span></div>
+    <nav class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="produk.html">Produk</a>
+      <a href="cart.html" class="cart-icon">🛒<span id="cart-count">0</span></a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Produk Kami</h1>
+    <input type="text" id="searchInput" placeholder="Cari produk...">
+    <div class="produk-grid" id="produkGrid"></div>
+  </main>
+
+  <script>
+    const produkList = [
+      { id: 1, nama: "Desain Grafis", harga: 350000, deskripsi: "Desain visual untuk kebutuhan promosi, branding, dan media sosial.", gambar: "assets/Desain Grafis.jpeg" },
+      { id: 2, nama: "Motion Graphics", harga: 900000, deskripsi: "Animasi bergerak untuk memperkuat pesan visual dan branding digital.", video: "assets/motion-graphic.mp4" },
+      { id: 3, nama: "Pembuatan Video", harga: 1000000, deskripsi: "Produksi video profesional untuk iklan, profil, atau kampanye digital.", video: "assets/pembuatan-video.mp4" },
+      { id: 4, nama: "Manajemen Sosmed", harga: 450000, deskripsi: "Kelola akun media sosial secara konsisten dan strategis.", gambar: "assets/sosmed.jpeg" },
+      { id: 5, nama: "Branding & Rebranding", harga: 450000, deskripsi: "Bangun atau segarkan identitas brand dengan pendekatan kreatif.", gambar: "assets/branding.jpeg" },
+      { id: 6, nama: "Iklan Digital", harga: 800000, deskripsi: "Strategi iklan online untuk menjangkau audiens secara maksimal.", gambar: "assets/Iklan Digital.jpeg" },
+      { id: 7, nama: "Iklan Tradisional", harga: 200000, deskripsi: "Promosi menggunakan media konvensional yang tetap efektif.", gambar: "assets/iklan tradisional.jpeg" },
+      { id: 8, nama: "Copywriting", harga: 300000, deskripsi: "Tulis konten promosi yang menarik, persuasif, dan tepat sasaran.", gambar: "assets/copywriting.jpeg" },
+      { id: 9, nama: "Iklan Youtube", harga: 750000, deskripsi: "Buat dan pasang iklan video untuk menjangkau pemirsa YouTube.", video: "assets/iklan youtube.mp4" },
+      { id: 10, nama: "Voice Over", harga: 500000, deskripsi: "Pengisi suara profesional untuk video, iklan, atau presentasi.", gambar: "assets/voice over.jpeg" },
+    ];
+
+    const produkGrid = document.getElementById("produkGrid");
+    const searchInput = document.getElementById("searchInput");
+    const cartCount = document.getElementById("cart-count");
+
+    function updateCartBadge() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const total = cart.reduce((sum, item) => sum + item.jumlah, 0);
+      cartCount.textContent = total;
+    }
+
+    function renderProduk(list) {
+      produkGrid.innerHTML = "";
+      list.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "produk-card";
+        card.innerHTML = `
+          ${item.video 
+            ? `<video src="${item.video}" autoplay loop muted playsinline width="100%" height="180" style="border-radius: 8px; margin-bottom: 1rem; object-fit: cover;"></video>` 
+            : `<img src="${item.gambar}" alt="${item.nama}" />`}
+          <h3>${item.nama}</h3>
+          <p class="harga">Rp ${item.harga.toLocaleString("id-ID")}</p>
+          <p class="deskripsi">${item.deskripsi}</p>
+          <div>
+            <a href="detail-produk.html?id=${item.id}" class="btn-detail">Lihat Detail</a>
+            <button class="btn-cart" data-id="${item.id}">+ Keranjang</button>
+          </div>
+        `;
+        produkGrid.appendChild(card);
+      });
+
+      document.querySelectorAll(".btn-cart").forEach(button => {
+        button.addEventListener("click", () => {
+          const id = parseInt(button.dataset.id);
+          const produk = produkList.find(p => p.id === id);
+          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+          const idx = cart.findIndex(item => item.id === id);
+          if (idx > -1) cart[idx].jumlah += 1;
+          else cart.push({ ...produk, jumlah: 1 });
+          localStorage.setItem("cart", JSON.stringify(cart));
+          alert(`${produk.nama} ditambahkan ke keranjang!`);
+          updateCartBadge();
+        });
+      });
+    }
+
+    searchInput.addEventListener("input", () => {
+      const keyword = searchInput.value.toLowerCase();
+      const hasil = produkList.filter(p => p.nama.toLowerCase().includes(keyword));
+      renderProduk(hasil);
+    });
+
+    renderProduk(produkList);
+    updateCartBadge();
+  </script>
+</body>
+</html>
