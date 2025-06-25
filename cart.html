@@ -3,214 +3,379 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="assets/logo.png" />
-  <title>Keranjang | Adrise</title>
+  <meta name="description" content="Keranjang belanja Anda di Adrise. Lihat item dan lanjutkan ke checkout.">
+  <title>Keranjang Belanja | Adrise Digital Creative Agency</title>
+
+  <!-- PERUBAHAN: Menyesuaikan Favicon seperti di produk.html -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Cpath d='M25.45,55.5s-2.3-25.5,13.4-39.7c15.2-13.8,30.3,1.1,20.2,21.1C49,57.1,25.45,55.5,25.45,55.5Z' fill='%233b82f6'/%3E%3Cpath d='M20.45,55.5s-2.3-19,10.1-29.8c12-10.4,22.8,0.8,15.2,15.9C38.25,52,20.45,55.5,20.45,55.5Z' fill='white' fill-opacity='0.9'/%3E%3Cpath d='M15.45,55.5s-2.3-12.6,6.8-20c8.8-7,15.3,0.5,10.1,10.6C27.55,51.4,15.45,55.5,15.45,55.5Z' fill='white' fill-opacity='0.7'/%3E%3C/svg%3E" type="image/svg+xml">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'dark-bg': '#000000',
+            'primary-bg': '#111111',
+            'secondary-bg': '#1F1F1F',
+            'primary-text': '#FFFFFF',
+            'secondary-text': '#A0A0A0',
+            'accent-logo': '#3b82f6',
+            'border-color': 'rgba(255, 255, 255, 0.1)',
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- PERUBAHAN: Mengganti Custom CSS untuk Navbar -->
   <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #111;
-      color: #eee;
+    body { font-family: 'Poppins', sans-serif; background-color: #000000; color: #FFFFFF; scroll-behavior: smooth; }
+    .header { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(12px); transition: all 0.3s ease; }
+    .header.scrolled { background: rgba(10, 10, 10, 0.85); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); }
+    .company-name-glow { text-shadow: 0 0 8px rgba(59, 130, 246, 0.8), 0 0 12px rgba(59, 130, 246, 0.6); animation: glow-animation 2s infinite alternate; }
+    @keyframes glow-animation { from { text-shadow: 0 0 8px rgba(59, 130, 246, 0.7), 0 0 12px rgba(59, 130, 246, 0.5); } to { text-shadow: 0 0 12px rgba(59, 130, 246, 0.9), 0 0 20px rgba(59, 130, 246, 0.7); } }
+    
+    /* === MOBILE NAVBAR STYLES (DARI produk.html) === */
+    @media screen and (max-width: 768px) {
+      .nav { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background-color: #111111; z-index: 1000; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1); display: grid; grid-template-rows: max-content 1fr max-content; row-gap: 2rem; padding: 2.5rem 0; }
+      .nav.show { left: 0; }
+      .nav__content { max-width: 1024px; display: grid; grid-template-rows: max-content 1fr max-content; row-gap: 3rem; margin-left: 1.5rem; margin-right: 1.5rem; }
+      .nav__close { position: absolute; top: 1rem; right: 1.5rem; font-size: 1.75rem; cursor: pointer; color: #FFFFFF; }
+      .nav__company { display: flex; align-items: center; gap: 0.75rem; }
+      .nav__logo_name { font-size: 1.25rem; font-weight: 700; color: #FFFFFF; }
+      .nav__list { display: flex; flex-direction: column; align-items: center; gap: 2.5rem; }
+      .nav__link { color: #A0A0A0; font-weight: 600; transition: color 0.3s; }
+      .nav__link:hover, .nav__link.active { color: #FFFFFF; }
+      .nav__social { display: flex; justify-content: center; gap: 1.5rem; }
+      .nav__social a { font-size: 1.5rem; color: #FFFFFF; transition: color 0.3s; }
+      .nav__social a:hover { color: #3b82f6; }
+      .desktop-nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
     }
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: rgba(26, 26, 26, 0.75);
-      backdrop-filter: blur(8px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    
+    /* Desktop Navbar */
+    @media screen and (min-width: 769px) {
+      .nav, .mobile-menu-btn { display: none; }
+      .desktop-nav-links { display: flex; }
+      .desktop-nav-links a { position: relative; transition: color 0.3s ease; }
+      .desktop-nav-links a::after { content: ""; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background-color: #FFFFFF; transition: width 0.3s ease; }
+      .desktop-nav-links a:hover, .desktop-nav-links a.active { color: #FFFFFF; }
+      .desktop-nav-links a:hover::after, .desktop-nav-links a.active::after { width: 100%; }
     }
-    .nav-links a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 1rem;
-      position: relative;
-    }
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background-color: #f9a825;
-      transition: width 0.3s ease;
-    }
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 2rem;
-    }
-    h1 {
-      text-align: center;
-      color: #ffd54f;
-      margin-bottom: 2rem;
-    }
-    .cart-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #1e1e1e;
-      border-radius: 12px;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 0 12px rgba(255, 213, 79, 0.1);
-    }
-    .cart-item img {
-      width: 120px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    .cart-info {
-      flex: 1;
-      margin-left: 1.5rem;
-    }
-    .cart-info h3 {
-      margin: 0 0 0.4rem 0;
-      color: #f9a825;
-    }
-    .cart-info p {
-      margin: 0;
-      font-size: 0.9rem;
-      color: #ccc;
-    }
-    .cart-actions {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 0.5rem;
-    }
-    .cart-actions button {
-      background-color: #f44336;
-      color: white;
-      border: none;
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .cart-actions button:hover {
-      background-color: #e53935;
-    }
-    .total-box {
-      text-align: right;
-      margin-top: 2rem;
-      font-size: 1.2rem;
-    }
-    .total-box span {
-      color: #ffd54f;
-      font-weight: bold;
-    }
-    .cart-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 2rem;
-    }
-    .cart-buttons a,
-    .cart-buttons button {
-      padding: 0.8rem 1.6rem;
-      font-size: 1rem;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-    }
-    .cart-buttons a {
-      background: transparent;
-      border: 1px solid #ffd54f;
-      color: #ffd54f;
-    }
-    .cart-buttons a:hover {
-      background-color: #ffd54f;
-      color: #111;
-    }
-    .cart-buttons button {
-      background-color: #f9a825;
-      color: #111;
-    }
-    .cart-buttons button:hover {
-      background-color: #ffeb3b;
-    }
+
+    /* Cart Page Specific Styles */
+    .fade-in-up { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1); }
+    .fade-in-up.animate { opacity: 1; transform: translateY(0); }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #111; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #555; }
+    .quantity-input { -moz-appearance: textfield; }
+    .quantity-input::-webkit-outer-spin-button, .quantity-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .confetti-piece { position: absolute; width: 10px; height: 20px; background: #f9a825; top: 0; opacity: 0; }
+    @keyframes confetti-fall { 0% { transform: translateY(-10vh) rotateZ(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotateZ(720deg); opacity: 0; } }
+    #success-modal .modal-content { transition: transform 0.3s ease, opacity 0.3s ease; }
+    #success-modal.show .modal-content { transform: scale(1); opacity: 1; }
   </style>
 </head>
-<body>
-  <header class="navbar">
-    <div class="logo" style="font-size: 1.5rem; font-weight: bold; color: #ffd54f; letter-spacing: 1px;">Adrise<span style="color: #f9a825;">.</span></div>
-    <nav class="nav-links">
-      <a href="index.html">Beranda</a>
-      <a href="produk.html">Produk</a>
-      <a href="cart.html">Keranjang</a>
-    </nav>
+
+<body class="font-poppins bg-primary-bg text-primary-text">
+  <!-- Confetti Container -->
+  <div id="confetti-container" class="fixed top-0 left-0 w-full h-full pointer-events-none z-[200]"></div>
+
+  <!-- PERUBAHAN: Mengganti struktur NAVBAR (header & nav) -->
+  <header class="header fixed w-full top-0 z-50 py-4">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <a href="homepage.html" class="flex items-center space-x-3 cursor-pointer">
+        <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" fill="currentColor" fill-opacity="0.1"/><path d="M16.5 9.5L7.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 22V12L2 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 7L12 12L12 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.5 9.5L16.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 7L7.5 9.5L12 7L16.5 9.5L22 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="logo text-xl font-bold company-name-glow">Adrise<span class="text-accent-logo">.</span></div>
+      </a>
+      
+      <nav class="desktop-nav-links hidden md:flex items-center space-x-8 text-secondary-text font-semibold">
+        <a href="homepage.html">Beranda</a>
+        <a href="homepage.html#services">Layanan</a>
+        <a href="produk.html">Produk</a>
+        <a href="homepage.html#about">Tentang</a>
+        <a href="homepage.html#contact">Kontak</a>
+      </nav>
+      
+      <div class="flex items-center gap-4">
+        <a href="cart.html" class="cart-icon text-primary-text flex items-center space-x-2">
+            <i class="fas fa-shopping-cart text-xl hover:text-gray-400 transition-colors"></i>
+            <span id="cart-count" class="bg-primary-text text-dark-bg text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+        </a>
+        <button id="nav-toggle" class="mobile-menu-btn text-white text-2xl md:hidden"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
   </header>
 
-  <main class="container">
-    <h1>Keranjang Kamu</h1>
-    <div id="cartList"></div>
-    <div class="total-box">Total: <span id="totalHarga">Rp 0</span></div>
-    <div class="cart-buttons">
-      <a href="produk.html">🛍️ Belanja Lagi</a>
-      <button onclick="checkoutCart()">💳 Checkout</button>
+  <nav class="nav" id="nav-menu">
+    <div class="nav__content">
+      <i class="fas fa-times nav__close" id="nav-close"></i>
+      <div class="nav__company">
+          <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" fill="currentColor" fill-opacity="0.1"/><path d="M16.5 9.5L7.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 22V12L2 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 7L12 12L12 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.5 9.5L16.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 7L7.5 9.5L12 7L16.5 9.5L22 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="nav__logo_name">Adrise.</span>
+      </div>
+      <ul class="nav__list">
+        <li class="nav__item"><a href="homepage.html" class="nav__link">Beranda</a></li>
+        <li class="nav__item"><a href="homepage.html#services" class="nav__link">Layanan</a></li>
+        <li class="nav__item"><a href="produk.html" class="nav__link">Produk</a></li>
+        <li class="nav__item"><a href="homepage.html#about" class="nav__link">Tentang</a></li>
+        <li class="nav__item"><a href="homepage.html#contact" class="nav__link">Kontak</a></li>
+      </ul>
+      <div class="nav__social">
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="min-h-screen pt-32 pb-20 bg-dark-bg">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12 fade-in-up">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Keranjang Belanja Anda</h1>
+            <p class="text-secondary-text max-w-2xl mx-auto">Periksa kembali pesanan Anda sebelum melanjutkan.</p>
+        </div>
+        <div id="cart-view" class="hidden fade-in-up" style="transition-delay: 200ms;">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div id="cart-items-container" class="lg:w-2/3 space-y-4"></div>
+                <div class="lg:w-1/3">
+                    <div id="cart-summary" class="bg-primary-bg p-6 rounded-2xl sticky top-28">
+                        <h2 class="text-2xl font-bold mb-6 border-b border-border-color pb-4">Ringkasan</h2>
+                        <div class="space-y-3 mb-6 text-secondary-text">
+                            <div class="flex justify-between"><p>Subtotal</p><p id="subtotal-price" class="font-semibold">Rp 0</p></div>
+                            <div class="flex justify-between"><p>Biaya Layanan</p><p class="font-semibold">GRATIS</p></div>
+                        </div>
+                        <div class="flex justify-between font-bold text-xl border-t border-border-color pt-4 mb-8">
+                            <p>Total</p><p id="total-price" class="text-blue-400">Rp 0</p>
+                        </div>
+                        <button id="checkout-btn" class="w-full bg-white text-black font-bold py-4 px-6 rounded-lg transition-all hover:bg-gray-300 transform hover:scale-105 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <i class="fab fa-whatsapp text-xl"></i>Checkout via WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="empty-cart-view" class="hidden text-center py-16 fade-in-up">
+            <i class="fas fa-shopping-cart text-6xl text-secondary-text mb-6"></i>
+            <h2 class="text-3xl font-bold mb-4">Keranjang Anda Kosong</h2>
+            <p class="text-secondary-text mb-8">Sepertinya Anda belum menambahkan produk apapun.</p>
+            <a href="produk.html" class="bg-white text-black font-bold py-3 px-8 rounded-lg transition-all hover:bg-gray-300 inline-block">
+                Jelajahi Produk Kami
+            </a>
+        </div>
     </div>
   </main>
+  
+  <!-- Success Modal -->
+  <div id="success-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-[150]">
+    <div class="modal-content bg-secondary-bg p-8 rounded-2xl text-center max-w-sm mx-4 transform scale-95 opacity-0">
+        <i class="fas fa-check-circle text-green-400 text-6xl mb-4"></i>
+        <h2 class="text-2xl font-bold mb-2">Terima Kasih!</h2>
+        <p class="text-secondary-text mb-6">Pesanan Anda telah kami terima. Tim kami akan segera menghubungi Anda via WhatsApp untuk konfirmasi selanjutnya.</p>
+        <button id="close-success-modal-btn" class="bg-white text-black font-bold py-2 px-6 rounded-lg hover:bg-gray-300 transition-colors">Tutup</button>
+    </div>
+  </div>
 
+  <!-- FOOTER -->
+  <footer class="py-10 bg-dark-bg border-t border-border-color">
+    <div class="container mx-auto px-4 text-center text-secondary-text">
+      <p>&copy; <span id="copyright-year"></span> Adrise. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- PERUBAHAN: Menyesuaikan JavaScript untuk Navbar -->
   <script>
-    const cartList = document.getElementById("cartList");
-    const totalHarga = document.getElementById("totalHarga");
+    document.addEventListener("DOMContentLoaded", () => {
+        // --- NEW: Mobile Menu Logic ---
+        const navMenu = document.getElementById('nav-menu');
+        const navToggle = document.getElementById('nav-toggle');
+        const navClose = document.getElementById('nav-close');
+        const navLinkItems = document.querySelectorAll('.nav__link');
 
-    function loadCart() {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cartList.innerHTML = "";
-      let total = 0;
+        if (navToggle) {
+            navToggle.addEventListener('click', () => navMenu.classList.add('show'));
+        }
+        if (navClose) {
+            navClose.addEventListener('click', () => navMenu.classList.remove('show'));
+        }
+        navLinkItems.forEach(n => n.addEventListener('click', () => navMenu.classList.remove('show')));
 
-      if (cart.length === 0) {
-        cartList.innerHTML = "<p style='text-align:center;'>Keranjang masih kosong.</p>";
-        totalHarga.textContent = "Rp 0";
-        return;
-      }
 
-      cart.forEach((item, index) => {
-        const div = document.createElement("div");
-        div.className = "cart-item";
-        div.innerHTML = `
-          <img src="${item.gambar}" alt="${item.nama}">
-          <div class="cart-info">
-            <h3>${item.nama}</h3>
-            <p>Harga: Rp ${item.harga.toLocaleString("id-ID")}</p>
-            <p>Jumlah: ${item.jumlah}</p>
-          </div>
-          <div class="cart-actions">
-            <button onclick="hapusItem(${index})">Hapus</button>
-          </div>
-        `;
-        cartList.appendChild(div);
-        total += item.harga * item.jumlah;
-      });
+        const masterProductList = [
+            { id: 1, nama: "Desain Grafis", harga: 350000, media: { src: 'assets/Desain Grafis.jpeg' } },
+            { id: 5, nama: "Branding & Rebranding", harga: 450000, media: { src: 'assets/branding.jpeg' } },
+            { id: 7, nama: "Iklan Tradisional", harga: 200000, media: { src: 'assets/iklan tradisional.jpeg' } },
+            { id: 8, nama: "Copywriting", harga: 300000, media: { src: 'assets/copywriting.jpeg' } },
+            { id: 10, nama: "Voice Over", harga: 500000, media: { src: 'assets/voice over.jpeg' } },
+            { id: 2, nama: "Motion Graphics", harga: 900000, media: { src: 'assets/motion-graphic.mp4' } },
+            { id: 3, nama: "Pembuatan Video", harga: 1000000, media: { src: 'assets/pembuatan-video.mp4' } },
+            { id: 4, nama: "Manajemen Sosmed", harga: 450000, media: { src: 'assets/sosmed.jpeg' } },
+            { id: 6, nama: "Iklan Digital", harga: 800000, media: { src: 'assets/Iklan Digital.jpeg' } },
+            { id: 9, nama: "Iklan Youtube", harga: 750000, media: { src: 'assets/iklan youtube.mp4' } }
+        ];
 
-      totalHarga.textContent = `Rp ${total.toLocaleString("id-ID")}`;
-    }
+        const cartCountEl = document.getElementById('cart-count');
+        const cartView = document.getElementById('cart-view');
+        const emptyCartView = document.getElementById('empty-cart-view');
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const subtotalPriceEl = document.getElementById('subtotal-price');
+        const totalPriceEl = document.getElementById('total-price');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const successModal = document.getElementById('success-modal');
+        const closeSuccessModalBtn = document.getElementById('close-success-modal-btn');
+        const confettiContainer = document.getElementById('confetti-container');
 
-    function hapusItem(index) {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      loadCart();
-    }
+        const getCart = () => JSON.parse(localStorage.getItem("cart")) || [];
+        const saveCart = (cart) => localStorage.setItem("cart", JSON.stringify(cart));
+        const clearCart = () => {
+            localStorage.removeItem("cart");
+            renderCart();
+        };
 
-    function checkoutCart() {
-      alert("Terima kasih! Checkout berhasil.");
-      localStorage.removeItem("cart");
-      loadCart();
-    }
+        const updateCartBadge = () => {
+            const cart = getCart();
+            const totalItems = cart.reduce((acc, item) => acc + (item.jumlah || 1), 0);
+            cartCountEl.textContent = totalItems;
+        };
 
-    loadCart();
+        const updateQuantity = (productId, newQuantity) => {
+            let cart = getCart();
+            const itemIndex = cart.findIndex(item => item.id === productId);
+            if (itemIndex > -1) {
+                if (newQuantity > 0) cart[itemIndex].jumlah = newQuantity;
+                else cart.splice(itemIndex, 1);
+                saveCart(cart);
+                renderCart();
+            }
+        };
+
+        const removeItem = (productId) => {
+            saveCart(getCart().filter(item => item.id !== productId));
+            renderCart();
+        };
+
+        const renderCart = () => {
+            const cart = getCart();
+            updateCartBadge();
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartView.classList.add('hidden');
+                emptyCartView.classList.remove('hidden');
+                emptyCartView.classList.add('animate');
+                return;
+            }
+            
+            cartView.classList.remove('hidden');
+            emptyCartView.classList.add('hidden');
+            cartView.classList.add('animate');
+
+            let subtotal = 0;
+            cart.forEach(item => {
+                const product = masterProductList.find(p => p.id === item.id);
+                if (!product) return;
+                const itemTotal = product.harga * item.jumlah;
+                subtotal += itemTotal;
+                const cartItemEl = document.createElement('div');
+                cartItemEl.className = 'bg-secondary-bg p-4 rounded-xl flex items-start sm:items-center gap-4 flex-col sm:flex-row';
+                cartItemEl.innerHTML = `
+                    <img src="${product.media.src}" alt="${product.nama}" class="w-24 h-24 sm:w-20 sm:h-20 object-cover rounded-lg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/1F1F1F/A0A0A0?text=img';">
+                    <div class="flex-grow">
+                        <h3 class="font-bold text-primary-text text-lg">${product.nama}</h3>
+                        <p class="text-secondary-text text-sm">Rp ${product.harga.toLocaleString("id-ID")}</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <input type="number" value="${item.jumlah}" min="1" class="quantity-input w-16 text-center bg-dark-bg border border-border-color rounded-md py-1" data-id="${item.id}">
+                        <p class="font-semibold w-28 text-right">Rp ${itemTotal.toLocaleString("id-ID")}</p>
+                        <button class="remove-item-btn text-secondary-text hover:text-red-500 transition-colors" data-id="${item.id}"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(cartItemEl);
+            });
+            
+            subtotalPriceEl.textContent = `Rp ${subtotal.toLocaleString("id-ID")}`;
+            totalPriceEl.textContent = `Rp ${subtotal.toLocaleString("id-ID")}`;
+
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('change', e => updateQuantity(parseInt(e.target.dataset.id), parseInt(e.target.value)));
+            });
+            document.querySelectorAll('.remove-item-btn').forEach(button => {
+                button.addEventListener('click', e => removeItem(parseInt(e.currentTarget.dataset.id)));
+            });
+        };
+        
+        const launchConfetti = () => {
+            const colors = ['#3b82f6', '#FFFFFF', '#a0a0a0', '#1F1F1F'];
+            for (let i = 0; i < 100; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = `${Math.random() * 100}%`;
+                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.animation = `confetti-fall ${Math.random() * 3 + 2}s linear ${Math.random() * 2}s forwards`;
+                confettiContainer.appendChild(piece);
+                setTimeout(() => piece.remove(), 5000);
+            }
+        };
+
+        const showSuccessModal = () => {
+            successModal.classList.remove('hidden');
+            setTimeout(() => successModal.classList.add('show'), 10);
+        };
+        
+        const hideSuccessModal = () => {
+            successModal.classList.remove('show');
+            setTimeout(() => successModal.classList.add('hidden'), 300);
+        };
+
+        const handleCheckout = () => {
+            const cart = getCart();
+            if (cart.length === 0) return;
+            const phoneNumber = "6285777622950";
+            let message = "Halo Adrise, saya tertarik dan ingin memesan layanan berikut:\n\n";
+            let total = 0;
+            cart.forEach(item => {
+                const product = masterProductList.find(p => p.id === item.id);
+                if (product) {
+                    message += `• *${item.jumlah}x ${product.nama}*\n`;
+                    total += item.jumlah * product.harga;
+                }
+            });
+            message += `\n*Total Pesanan: Rp ${total.toLocaleString("id-ID")}*\n\nMohon informasinya lebih lanjut. Terima kasih!`;
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            launchConfetti();
+            showSuccessModal();
+            clearCart();
+        };
+
+        // --- Event Listeners & Initial Setup ---
+        const header = document.querySelector('.header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        checkoutBtn.addEventListener('click', handleCheckout);
+        closeSuccessModalBtn.addEventListener('click', hideSuccessModal);
+
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+        renderCart();
+        document.querySelector('.fade-in-up').classList.add('animate');
+    });
   </script>
 </body>
 </html>

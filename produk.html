@@ -3,231 +3,350 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="assets/logo.png" />
-  <title>Produk | Adrise</title>
+  <meta name="description" content="Jelajahi produk dan layanan digital dari Adrise. Solusi kreatif untuk branding, marketing, dan pengembangan web.">
+  <title>Produk & Layanan | Adrise Digital Creative Agency</title>
+  
+  <!-- Favicon (Sama seperti Homepage) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Cpath d='M25.45,55.5s-2.3-25.5,13.4-39.7c15.2-13.8,30.3,1.1,20.2,21.1C49,57.1,25.45,55.5,25.45,55.5Z' fill='%233b82f6'/%3E%3Cpath d='M20.45,55.5s-2.3-19,10.1-29.8c12-10.4,22.8,0.8,15.2,15.9C38.25,52,20.45,55.5,20.45,55.5Z' fill='white' fill-opacity='0.9'/%3E%3Cpath d='M15.45,55.5s-2.3-12.6,6.8-20c8.8-7,15.3,0.5,10.1,10.6C27.55,51.4,15.45,55.5,15.45,55.5Z' fill='white' fill-opacity='0.7'/%3E%3C/svg%3E" type="image/svg+xml">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'dark-bg': '#000000',
+            'primary-bg': '#111111',
+            'secondary-bg': '#1F1F1F',
+            'primary-text': '#FFFFFF',
+            'secondary-text': '#A0A0A0',
+            'accent-logo': '#3b82f6',
+            'border-color': 'rgba(255, 255, 255, 0.1)',
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Custom CSS -->
   <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #111;
-      color: #eee;
-    }
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: rgba(26, 26, 26, 0.75);
-      backdrop-filter: blur(8px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-links a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 1rem;
-      position: relative;
-
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background-color: #ffd54f;
-      transition: width 0.3s ease;
-    }
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-    .cart-icon {
-      position: relative;
-    }
-    #cart-count {
-      position: absolute;
-      top: -10px;
-      right: -12px;
-      background: red;
-      color: white;
-      font-size: 0.7rem;
-      padding: 3px 6px;
-      border-radius: 50%;
-      font-weight: bold;
-    }
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 2rem;
-    }
-    h1 {
-      text-align: center;
-      color: #ffd54f;
-      margin-bottom: 2rem;
-    }
-    #searchInput {
-      display: block;
-      margin: 0 auto 2rem auto;
-      padding: 0.6rem 1rem;
-      border-radius: 6px;
-      border: none;
-      width: 300px;
-      font-size: 1rem;
-    }
-    .produk-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-    }
-    .produk-card {
-      background: #1e1e1e;
-      border-radius: 12px;
-      padding: 1rem;
-      box-shadow: 0 0 10px rgba(255, 213, 79, 0.1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .produk-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px rgba(255, 213, 79, 0.4);
-    }
-    .produk-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
-    .produk-card h3 {
-      color: #f9a825;
-      margin: 0.5rem 0;
-    }
-    .produk-card .harga {
-      color: #ffd54f;
-      font-weight: bold;
-    }
-    .produk-card .deskripsi {
-      font-size: 0.9rem;
-      color: #bbb;
-      margin: 0.5rem 0 1rem;
-    }
-    .produk-card a,
-    .produk-card button {
-      padding: 0.6rem 1rem;
-      margin: 0.2rem;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 0.9rem;
-    }
-    .btn-detail {
-      background: transparent;
-      color: #ffd54f;
-      border: 1px solid #ffd54f;
-      transition: color 0.3s ease, border-bottom 0.3s ease;
-      position: relative;
+    body { font-family: 'Poppins', sans-serif; background-color: #000000; color: #FFFFFF; scroll-behavior: smooth; }
+    .header { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(12px); transition: all 0.3s ease; }
+    .header.scrolled { background: rgba(10, 10, 10, 0.85); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); }
+    .company-name-glow { text-shadow: 0 0 8px rgba(59, 130, 246, 0.8), 0 0 12px rgba(59, 130, 246, 0.6); animation: glow-animation 2s infinite alternate; }
+    @keyframes glow-animation { from { text-shadow: 0 0 8px rgba(59, 130, 246, 0.7), 0 0 12px rgba(59, 130, 246, 0.5); } to { text-shadow: 0 0 12px rgba(59, 130, 246, 0.9), 0 0 20px rgba(59, 130, 246, 0.7); } }
+    
+    /* === MOBILE NAVBAR STYLES (FROM HOMEPAGE) === */
+    @media screen and (max-width: 768px) {
+      .nav { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background-color: #111111; z-index: 1000; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1); display: grid; grid-template-rows: max-content 1fr max-content; row-gap: 2rem; padding: 2.5rem 0; }
+      .nav.show { left: 0; }
+      .nav__content { max-width: 1024px; display: grid; grid-template-rows: max-content 1fr max-content; row-gap: 3rem; margin-left: 1.5rem; margin-right: 1.5rem; }
+      .nav__close { position: absolute; top: 1rem; right: 1.5rem; font-size: 1.75rem; cursor: pointer; color: #FFFFFF; }
+      .nav__company { display: flex; align-items: center; gap: 0.75rem; }
+      .nav__logo_name { font-size: 1.25rem; font-weight: 700; color: #FFFFFF; }
+      .nav__list { display: flex; flex-direction: column; align-items: center; gap: 2.5rem; }
+      .nav__link { color: #A0A0A0; font-weight: 600; transition: color 0.3s; }
+      .nav__link:hover, .nav__link.active { color: #FFFFFF; }
+      .nav__social { display: flex; justify-content: center; gap: 1.5rem; }
+      .nav__social a { font-size: 1.5rem; color: #FFFFFF; transition: color 0.3s; }
+      .nav__social a:hover { color: #3b82f6; }
+      .desktop-nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
     }
     
-    .btn-detail:hover {
-      color: #fff;
+    /* Desktop Navbar */
+    @media screen and (min-width: 769px) {
+      .nav, .mobile-menu-btn { display: none; }
+      .desktop-nav-links { display: flex; }
+      .desktop-nav-links a { position: relative; transition: color 0.3s ease; }
+      .desktop-nav-links a::after { content: ""; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background-color: #FFFFFF; transition: width 0.3s ease; }
+      .desktop-nav-links a:hover, .desktop-nav-links a.active { color: #FFFFFF; }
+      .desktop-nav-links a:hover::after, .desktop-nav-links a.active::after { width: 100%; }
     }
-    .btn-cart {
-      background: #f9a825;
-      color: #121212;
+
+    /* Product Page Specific Styles */
+    .product-card { transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.1); }
+    .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(255, 255, 255, 0.07); border-color: rgba(255, 255, 255, 0.3); }
+    .product-card video, .product-card img { object-fit: cover; }
+    .filter-btn { transition: all 0.3s ease; }
+    .filter-btn.active { background-color: #FFFFFF; color: #000000; }
+    .notification-modal { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 200; }
+    .notification-modal.show { top: 20px; }
+    .fade-in-up { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1); }
+    .fade-in-up.animate { opacity: 1; transform: translateY(0); }
+    .whatsapp-float { position: fixed; bottom: 30px; left: 30px; width: 60px; height: 60px; background-color: #25D366; color: #FFF; border-radius: 50px; text-align: center; box-shadow: 2px 2px 10px rgba(0,0,0,0.3); z-index: 100; display: flex; align-items: center; justify-content: flex-start; padding-left: 15px; overflow: hidden; white-space: nowrap; text-decoration: none; opacity: 0.8; transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1), border-radius 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease; }
+    .whatsapp-float:hover { width: 260px; border-radius: 30px; opacity: 1; }
+    .whatsapp-icon { font-size: 30px; transition: transform 0.3s ease; }
+    .whatsapp-float:hover .whatsapp-icon { transform: rotate(360deg); }
+    .whatsapp-text { font-size: 16px; font-weight: 600; margin-left: 10px; max-width: 0; opacity: 0; transition: max-width 0.3s ease-in-out 0.1s, opacity 0.2s ease-in-out 0.1s; }
+    .whatsapp-float:hover .whatsapp-text { max-width: 200px; opacity: 1; }
+    @media (max-width: 768px) {
+      .whatsapp-float { width: 50px; height: 50px; bottom: 20px; left: 20px; padding-left: 12px; }
+      .whatsapp-icon { font-size: 26px; }
+      .whatsapp-float:hover { width: 50px; }
+      .whatsapp-float:hover .whatsapp-text { max-width: 0; opacity: 0; }
     }
   </style>
 </head>
-<body>
-  <header class="navbar">
-    <div class="logo" style="font-size: 1.5rem; font-weight: bold; color: #ffd54f; letter-spacing: 1px;">Adrise<span style="color: #f9a825;">.</span></div>
-    <nav class="nav-links">
-      <a href="index.html">Beranda</a>
-      <a href="produk.html">Produk</a>
-      <a href="cart.html" class="cart-icon">🛒<span id="cart-count">0</span></a>
-    </nav>
+
+<body class="font-poppins bg-dark-bg text-primary-text">
+  <!-- NAVBAR (UPDATED) -->
+  <header class="header fixed w-full top-0 z-50 py-4">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <a href="homepage.html" class="flex items-center space-x-3 cursor-pointer">
+        <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" fill="currentColor" fill-opacity="0.1"/><path d="M16.5 9.5L7.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 22V12L2 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 7L12 12L12 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.5 9.5L16.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 7L7.5 9.5L12 7L16.5 9.5L22 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="logo text-xl font-bold company-name-glow">Adrise<span class="text-accent-logo">.</span></div>
+      </a>
+      
+      <nav class="desktop-nav-links hidden md:flex items-center space-x-8 text-secondary-text font-semibold">
+        <a href="homepage.html">Beranda</a>
+        <a href="homepage.html#services">Layanan</a>
+        <a href="produk.html" class="active">Produk</a>
+        <a href="homepage.html#about">Tentang</a>
+        <a href="homepage.html#contact">Kontak</a>
+      </nav>
+      
+      <div class="flex items-center gap-4">
+        <a href="cart.html" class="cart-icon text-primary-text flex items-center space-x-2">
+            <i class="fas fa-shopping-cart text-xl hover:text-gray-400 transition-colors"></i>
+            <span id="cart-count" class="bg-primary-text text-dark-bg text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+        </a>
+        <button id="nav-toggle" class="mobile-menu-btn text-white text-2xl md:hidden"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
   </header>
 
-  <main class="container">
-    <h1>Produk Kami</h1>
-    <input type="text" id="searchInput" placeholder="Cari produk...">
-    <div class="produk-grid" id="produkGrid"></div>
+  <!-- MOBILE NAVBAR (NEW) -->
+  <nav class="nav" id="nav-menu">
+    <div class="nav__content">
+      <i class="fas fa-times nav__close" id="nav-close"></i>
+      <div class="nav__company">
+          <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" fill="currentColor" fill-opacity="0.1"/><path d="M16.5 9.5L7.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 22V12L2 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 7L12 12L12 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.5 9.5L16.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 7L7.5 9.5L12 7L16.5 9.5L22 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="nav__logo_name">Adrise.</span>
+      </div>
+      <ul class="nav__list">
+        <li class="nav__item"><a href="homepage.html" class="nav__link">Beranda</a></li>
+        <li class="nav__item"><a href="homepage.html#services" class="nav__link">Layanan</a></li>
+        <li class="nav__item"><a href="produk.html" class="nav__link active">Produk</a></li>
+        <li class="nav__item"><a href="homepage.html#about" class="nav__link">Tentang</a></li>
+        <li class="nav__item"><a href="homepage.html#contact" class="nav__link">Kontak</a></li>
+      </ul>
+      <div class="nav__social">
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main id="produk" class="pt-32 pb-20 bg-primary-bg">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12 fade-in-up">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Jelajahi Produk & Layanan Kami</h1>
+            <p class="text-secondary-text max-w-2xl mx-auto mb-8">Temukan solusi yang tepat untuk mendorong pertumbuhan bisnis Anda ke level berikutnya.</p>
+            <div class="max-w-xl mx-auto">
+                 <input type="text" id="search-input" placeholder="Cari layanan atau produk..." class="w-full px-6 py-4 bg-secondary-bg rounded-lg border border-border-color focus:outline-none focus:ring-2 focus:ring-white transition-all text-center">
+            </div>
+        </div>
+        <div id="category-filters" class="flex justify-center gap-2 md:gap-4 mb-12 flex-wrap fade-in-up" style="transition-delay: 150ms;">
+            <button class="filter-btn active font-semibold py-2 px-6 rounded-full border-2 border-white" data-kategori="semua">Semua</button>
+            <button class="filter-btn font-semibold py-2 px-6 rounded-full border-2 border-white" data-kategori="layanan">Layanan</button>
+            <button class="filter-btn font-semibold py-2 px-6 rounded-full border-2 border-white" data-kategori="produk unggulan">Produk Unggulan</button>
+        </div>
+        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Product cards will be injected here by JavaScript -->
+        </div>
+    </div>
   </main>
 
+  <!-- FOOTER -->
+  <footer class="py-10 bg-dark-bg border-t border-border-color">
+    <div class="container mx-auto px-4 text-center text-secondary-text">
+      <p>&copy; <span id="copyright-year"></span> Adrise. All Rights Reserved.</p>
+      <div class="mt-4 flex justify-center space-x-6">
+        <a href="#" class="hover:text-primary-text transition-colors">Facebook</a>
+        <a href="#" class="hover:text-primary-text transition-colors">Instagram</a>
+        <a href="#" class="hover:text-primary-text transition-colors">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/6285777622950?text=Halo%2C%20saya%20tertarik%20dengan%20layanan%20Adrise." target="_blank" class="whatsapp-float" aria-label="Hubungi kami di WhatsApp">
+      <i class="fab fa-whatsapp whatsapp-icon"></i>
+      <span class="whatsapp-text">Hubungi di WhatsApp</span>
+  </a>
+
+  <!-- Modal Notifikasi -->
+  <div id="notification-modal" class="notification-modal bg-green-500 text-white py-3 px-6 rounded-lg shadow-lg">
+      <p id="notification-message">Item berhasil ditambahkan!</p>
+  </div>
+
+  <!-- JavaScript -->
   <script>
-    const produkList = [
-      { id: 1, nama: "Desain Grafis", harga: 350000, deskripsi: "Desain visual untuk kebutuhan promosi, branding, dan media sosial.", gambar: "assets/Desain Grafis.jpeg" },
-      { id: 2, nama: "Motion Graphics", harga: 900000, deskripsi: "Animasi bergerak untuk memperkuat pesan visual dan branding digital.", video: "assets/motion-graphic.mp4" },
-      { id: 3, nama: "Pembuatan Video", harga: 1000000, deskripsi: "Produksi video profesional untuk iklan, profil, atau kampanye digital.", video: "assets/pembuatan-video.mp4" },
-      { id: 4, nama: "Manajemen Sosmed", harga: 450000, deskripsi: "Kelola akun media sosial secara konsisten dan strategis.", gambar: "assets/sosmed.jpeg" },
-      { id: 5, nama: "Branding & Rebranding", harga: 450000, deskripsi: "Bangun atau segarkan identitas brand dengan pendekatan kreatif.", gambar: "assets/branding.jpeg" },
-      { id: 6, nama: "Iklan Digital", harga: 800000, deskripsi: "Strategi iklan online untuk menjangkau audiens secara maksimal.", gambar: "assets/Iklan Digital.jpeg" },
-      { id: 7, nama: "Iklan Tradisional", harga: 200000, deskripsi: "Promosi menggunakan media konvensional yang tetap efektif.", gambar: "assets/iklan tradisional.jpeg" },
-      { id: 8, nama: "Copywriting", harga: 300000, deskripsi: "Tulis konten promosi yang menarik, persuasif, dan tepat sasaran.", gambar: "assets/copywriting.jpeg" },
-      { id: 9, nama: "Iklan Youtube", harga: 750000, deskripsi: "Buat dan pasang iklan video untuk menjangkau pemirsa YouTube.", video: "assets/iklan youtube.mp4" },
-      { id: 10, nama: "Voice Over", harga: 500000, deskripsi: "Pengisi suara profesional untuk video, iklan, atau presentasi.", gambar: "assets/voice over.jpeg" },
-    ];
+    document.addEventListener("DOMContentLoaded", () => {
+      // --- NEW: Mobile Menu Logic ---
+      const navMenu = document.getElementById('nav-menu');
+      const navToggle = document.getElementById('nav-toggle');
+      const navClose = document.getElementById('nav-close');
+      const navLinks = document.querySelectorAll('.nav__link');
 
-    const produkGrid = document.getElementById("produkGrid");
-    const searchInput = document.getElementById("searchInput");
-    const cartCount = document.getElementById("cart-count");
+      if (navToggle) {
+        navToggle.addEventListener('click', () => navMenu.classList.add('show'));
+      }
+      if (navClose) {
+        navClose.addEventListener('click', () => navMenu.classList.remove('show'));
+      }
+      navLinks.forEach(n => n.addEventListener('click', () => navMenu.classList.remove('show')));
 
-    function updateCartBadge() {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const total = cart.reduce((sum, item) => sum + item.jumlah, 0);
-      cartCount.textContent = total;
-    }
+      // --- Data Produk ---
+      const masterProductList = [
+        { id: 1, nama: "Desain Grafis", harga: 350000, deskripsi: "Desain visual untuk kebutuhan promosi, branding, dan media sosial.", media: { type: 'image', src: 'assets/Desain Grafis.jpeg' }, kategori: 'layanan' },
+        { id: 5, nama: "Branding & Rebranding", harga: 450000, deskripsi: "Bangun atau segarkan identitas brand dengan pendekatan kreatif.", media: { type: 'image', src: 'assets/branding.jpeg' }, kategori: 'layanan' },
+        { id: 7, nama: "Iklan Tradisional", harga: 200000, deskripsi: "Promosi menggunakan media konvensional yang tetap efektif.", media: { type: 'image', src: 'assets/iklan tradisional.jpeg' }, kategori: 'layanan' },
+        { id: 8, nama: "Copywriting", harga: 300000, deskripsi: "Tulis konten promosi yang menarik, persuasif, dan tepat sasaran.", media: { type: 'image', src: 'assets/copywriting.jpeg' }, kategori: 'layanan' },
+        { id: 10, nama: "Voice Over", harga: 500000, deskripsi: "Pengisi suara profesional untuk video, iklan, atau presentasi.", media: { type: 'image', src: 'assets/voice over.jpeg' }, kategori: 'layanan' },
+        { id: 2, nama: "Motion Graphics", harga: 900000, deskripsi: "Animasi bergerak untuk memperkuat pesan visual dan branding digital.", media: { type: 'video', src: 'assets/motion-graphic.mp4' }, kategori: 'produk unggulan' },
+        { id: 3, nama: "Pembuatan Video", harga: 1000000, deskripsi: "Produksi video profesional untuk iklan, profil, atau kampanye digital.", media: { type: 'video', src: 'assets/pembuatan-video.mp4' }, kategori: 'produk unggulan' },
+        { id: 4, nama: "Manajemen Sosmed", harga: 450000, deskripsi: "Kelola akun media sosial secara konsisten dan strategis.", media: { type: 'image', src: 'assets/sosmed.jpeg' }, kategori: 'produk unggulan' },
+        { id: 6, nama: "Iklan Digital", harga: 800000, deskripsi: "Strategi iklan online untuk menjangkau audiens secara maksimal.", media: { type: 'image', src: 'assets/Iklan Digital.jpeg' }, kategori: 'produk unggulan' },
+        { id: 9, nama: "Iklan Youtube", harga: 750000, deskripsi: "Buat dan pasang iklan video untuk menjangkau pemirsa YouTube.", media: { type: 'video', src: 'assets/iklan youtube.mp4' }, kategori: 'produk unggulan' }
+      ];
+      
+      const productGrid = document.getElementById("product-grid");
+      const searchInput = document.getElementById("search-input");
+      const cartCountEl = document.getElementById("cart-count");
+      const categoryFilters = document.getElementById("category-filters");
+      const notificationModal = document.getElementById("notification-modal");
+      const notificationMessage = document.getElementById("notification-message");
+      let currentFilter = 'semua';
 
-    function renderProduk(list) {
-      produkGrid.innerHTML = "";
-      list.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "produk-card";
-        card.innerHTML = `
-          ${item.video 
-            ? `<video src="${item.video}" autoplay loop muted playsinline width="100%" height="180" style="border-radius: 8px; margin-bottom: 1rem; object-fit: cover;"></video>` 
-            : `<img src="${item.gambar}" alt="${item.nama}" />`}
-          <h3>${item.nama}</h3>
-          <p class="harga">Rp ${item.harga.toLocaleString("id-ID")}</p>
-          <p class="deskripsi">${item.deskripsi}</p>
-          <div>
-            <a href="detail-produk.html?id=${item.id}" class="btn-detail">Lihat Detail</a>
-            <button class="btn-cart" data-id="${item.id}">+ Keranjang</button>
-          </div>
-        `;
-        produkGrid.appendChild(card);
-      });
-
-      document.querySelectorAll(".btn-cart").forEach(button => {
-        button.addEventListener("click", () => {
-          const id = parseInt(button.dataset.id);
-          const produk = produkList.find(p => p.id === id);
-          let cart = JSON.parse(localStorage.getItem("cart")) || [];
-          const idx = cart.findIndex(item => item.id === id);
-          if (idx > -1) cart[idx].jumlah += 1;
-          else cart.push({ ...produk, jumlah: 1 });
-          localStorage.setItem("cart", JSON.stringify(cart));
-          alert(`${produk.nama} ditambahkan ke keranjang!`);
-          updateCartBadge();
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+            observer.unobserve(entry.target);
+          }
         });
+      }, { threshold: 0.1 });
+
+      const observeElements = () => {
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+          if (!el.classList.contains('animate')) {
+            observer.observe(el);
+          }
+        });
+      };
+
+      const renderProducts = (productsToRender) => {
+        productGrid.innerHTML = "";
+        if (productsToRender.length === 0) {
+            productGrid.innerHTML = `<p class="text-secondary-text col-span-full text-center">Produk tidak ditemukan.</p>`;
+            return;
+        }
+        productsToRender.forEach((product, index) => {
+          const card = document.createElement("div");
+          card.className = "product-card bg-secondary-bg rounded-xl flex flex-col fade-in-up";
+          card.style.transitionDelay = `${(index % 4) * 100}ms`;
+          
+          let mediaElement = product.media.type === 'video'
+              ? `<video src="${product.media.src}" autoplay loop muted playsinline class="w-full h-48 rounded-t-xl" onerror="this.style.display='none'"></video>`
+              : `<img src="${product.media.src}" alt="${product.nama}" class="w-full h-48 rounded-t-xl" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1F1F1F/A0A0A0?text=Asset+not+found';">`;
+          
+          card.innerHTML = `
+            <div class="h-48 bg-dark-bg rounded-t-xl">${mediaElement}</div>
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="text-xl font-bold text-primary-text mb-2">${product.nama}</h3>
+              <p class="text-lg font-semibold text-blue-400 mb-3">Rp ${product.harga.toLocaleString("id-ID")}</p>
+              <p class="text-secondary-text text-sm mb-4 flex-grow">${product.deskripsi}</p>
+              <div class="mt-auto flex flex-col sm:flex-row gap-2">
+                <a href="detail-produk.html?id=${product.id}" class="w-full text-center border-2 border-white text-white font-bold py-2 px-4 rounded-lg transition-all hover:bg-white hover:text-black">Detail</a>
+                <button class="add-to-cart-btn w-full bg-white text-black font-bold py-2 px-4 rounded-lg transition-all hover:bg-gray-300" data-id="${product.id}"><i class="fas fa-cart-plus mr-2"></i>Tambah</button>
+              </div>
+            </div>`;
+          productGrid.appendChild(card);
+        });
+
+        observeElements();
+
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+          button.addEventListener('click', (e) => {
+            const id = parseInt(e.currentTarget.dataset.id);
+            addToCart(id);
+          });
+        });
+      };
+      
+      const addToCart = (productId) => {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const product = masterProductList.find(p => p.id === productId);
+        const existingItem = cart.find(item => item.id === productId);
+        if (existingItem) {
+          existingItem.jumlah = (existingItem.jumlah || 1) + 1;
+        } else {
+          cart.push({ ...product, jumlah: 1 });
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartBadge();
+        showNotification(`"${product.nama}" ditambahkan ke keranjang!`);
+      };
+      
+      const updateCartBadge = () => {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const totalItems = cart.reduce((acc, item) => acc + (item.jumlah || 1), 0);
+        cartCountEl.textContent = totalItems;
+      };
+
+      const showNotification = (message) => {
+          notificationMessage.textContent = message;
+          notificationModal.classList.add('show');
+          setTimeout(() => notificationModal.classList.remove('show'), 3000);
+      };
+
+      const filterAndSearch = () => {
+        let filteredList = masterProductList;
+        if (currentFilter !== 'semua') {
+            filteredList = masterProductList.filter(p => p.kategori === currentFilter);
+        }
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        if (searchTerm) {
+            filteredList = filteredList.filter(p => p.nama.toLowerCase().includes(searchTerm) || p.deskripsi.toLowerCase().includes(searchTerm));
+        }
+        renderProducts(filteredList);
+      }
+
+      searchInput.addEventListener('input', filterAndSearch);
+      categoryFilters.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+            categoryFilters.querySelector('.active').classList.remove('active');
+            e.target.classList.add('active');
+            currentFilter = e.target.dataset.kategori;
+            filterAndSearch();
+        }
       });
-    }
+      
+      const header = document.querySelector('.header');
+      window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+      });
+      document.getElementById('copyright-year').textContent = new Date().getFullYear();
 
-    searchInput.addEventListener("input", () => {
-      const keyword = searchInput.value.toLowerCase();
-      const hasil = produkList.filter(p => p.nama.toLowerCase().includes(keyword));
-      renderProduk(hasil);
+      // Inisialisasi
+      filterAndSearch();
+      updateCartBadge();
+      observeElements();
     });
-
-    renderProduk(produkList);
-    updateCartBadge();
   </script>
 </body>
 </html>

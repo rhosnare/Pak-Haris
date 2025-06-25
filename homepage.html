@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Adrise - Agensi Digital Marketing Profesional. Bantu bisnismu tumbuh secara online dengan strategi dan desain terbaik.">
+  <title>Adrise | Digital Creative Agency</title>
+
+  <!-- Favicon Baru -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Cpath d='M25.45,55.5s-2.3-25.5,13.4-39.7c15.2-13.8,30.3,1.1,20.2,21.1C49,57.1,25.45,55.5,25.45,55.5Z' fill='%233b82f6'/%3E%3Cpath d='M20.45,55.5s-2.3-19,10.1-29.8c12-10.4,22.8,0.8,15.2,15.9C38.25,52,20.45,55.5,20.45,55.5Z' fill='white' fill-opacity='0.9'/%3E%3Cpath d='M15.45,55.5s-2.3-12.6,6.8-20c8.8-7,15.3,0.5,10.1,10.6C27.55,51.4,15.45,55.5,15.45,55.5Z' fill='white' fill-opacity='0.7'/%3E%3C/svg%3E" type="image/svg+xml">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'dark-bg': '#000000',
+            'primary-bg': '#111111',
+            'secondary-bg': '#1F1F1F',
+            'primary-text': '#FFFFFF',
+            'secondary-text': '#A0A0A0',
+            'accent-logo': '#3b82f6',
+            'border-color': 'rgba(255, 255, 255, 0.1)',
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Custom CSS -->
+  <style>
+    /* General Styling */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--primary-text);
+      scroll-behavior: smooth;
+    }
+    
+    /* Navbar Styling */
+    .header {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+    }
+    
+    .header.scrolled {
+      background: rgba(10, 10, 10, 0.85);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Company Name Glow Effect */
+    .company-name-glow {
+        text-shadow: 0 0 8px rgba(59, 130, 246, 0.8), 0 0 12px rgba(59, 130, 246, 0.6);
+        animation: glow-animation 2s infinite alternate;
+    }
+
+    @keyframes glow-animation {
+        from { text-shadow: 0 0 8px rgba(59, 130, 246, 0.7), 0 0 12px rgba(59, 130, 246, 0.5); }
+        to { text-shadow: 0 0 12px rgba(59, 130, 246, 0.9), 0 0 20px rgba(59, 130, 246, 0.7); }
+    }
+    
+    /* === MOBILE NAVBAR STYLES (NEW) === */
+    @media screen and (max-width: 768px) {
+      .nav {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100vh;
+        background-color: #111111;
+        z-index: 1000;
+        transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        display: grid;
+        grid-template-rows: max-content 1fr max-content;
+        row-gap: 2rem;
+        padding: 2.5rem 0;
+      }
+
+      .nav.show {
+        left: 0;
+      }
+      
+      .nav__content {
+        max-width: 1024px;
+        display: grid;
+        grid-template-rows: max-content 1fr max-content;
+        row-gap: 3rem;
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+      }
+
+      .nav__close {
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+        font-size: 1.75rem;
+        cursor: pointer;
+        color: #FFFFFF;
+      }
+      
+      .nav__company {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+      }
+      
+      .nav__logo_name {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: #FFFFFF;
+      }
+
+      .nav__list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+      }
+      
+      .nav__link {
+        color: #A0A0A0;
+        font-weight: 600;
+        transition: color 0.3s;
+      }
+      
+      .nav__link:hover, .nav__link.active {
+        color: #FFFFFF;
+      }
+      
+      .nav__social {
+          display: flex;
+          justify-content: center;
+          gap: 1.5rem;
+      }
+      
+      .nav__social a {
+          font-size: 1.5rem;
+          color: #FFFFFF;
+          transition: color 0.3s;
+      }
+      .nav__social a:hover {
+          color: #3b82f6;
+      }
+
+      /* Hide original nav links, show toggle */
+      .desktop-nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
+    
+    /* Desktop Navbar */
+    @media screen and (min-width: 769px) {
+      .nav, .mobile-menu-btn {
+        display: none;
+      }
+      .desktop-nav-links {
+        display: flex;
+      }
+      .desktop-nav-links a {
+        position: relative;
+        transition: color 0.3s ease;
+      }
+      .desktop-nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #FFFFFF;
+        transition: width 0.3s ease;
+      }
+      .desktop-nav-links a:hover, .desktop-nav-links a.active {
+        color: #FFFFFF;
+      }
+      .desktop-nav-links a:hover::after, .desktop-nav-links a.active::after {
+        width: 100%;
+      }
+    }
+
+
+    /* Other Styles (Unchanged) */
+    .hero { position: relative; height: 100vh; overflow: hidden; }
+    .hero-slider .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transform: scale(1.1); transition: opacity 1.5s ease-in-out, transform 8s linear; z-index: 1; }
+    .hero-slider .slide.active { opacity: 1; transform: scale(1); }
+    .hero-slider .slide-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3)); z-index: 2; }
+    .hero-content { position: relative; z-index: 3; }
+    .slider-dots { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 4; }
+    .slider-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.3); cursor: pointer; transition: all 0.4s ease; }
+    .slider-dot.active { background: #FFFFFF; transform: scale(1.2); }
+    .typing-cursor { display: inline-block; width: 3px; height: 1em; background-color: #A0A0A0; animation: blink 0.7s infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; background: #111111; border: 1px solid rgba(255, 255, 255, 0.1); }
+    .card-hover:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.2); }
+    .primary-btn { background: #FFFFFF; color: #000000; transition: all 0.3s ease; }
+    .primary-btn:hover { background: #CCCCCC; transform: translateY(-3px) scale(1.05); }
+    .secondary-btn { border: 2px solid #FFFFFF; color: #FFFFFF; transition: all 0.3s ease; }
+    .secondary-btn:hover { background: #FFFFFF; color: #000000; }
+    .fade-in-up { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1); }
+    .fade-in-up.animate { opacity: 1; transform: translateY(0); }
+    .whatsapp-float { position: fixed; bottom: 30px; left: 30px; width: 60px; height: 60px; background-color: #25D366; color: #FFF; border-radius: 50px; text-align: center; box-shadow: 2px 2px 10px rgba(0,0,0,0.3); z-index: 100; display: flex; align-items: center; justify-content: flex-start; padding-left: 15px; overflow: hidden; white-space: nowrap; text-decoration: none; opacity: 0.8; transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1), border-radius 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease; }
+    .whatsapp-float:hover { width: 260px; border-radius: 30px; opacity: 1; }
+    .whatsapp-icon { font-size: 30px; transition: transform 0.3s ease; }
+    .whatsapp-float:hover .whatsapp-icon { transform: rotate(360deg); }
+    .whatsapp-text { font-size: 16px; font-weight: 600; margin-left: 10px; max-width: 0; opacity: 0; transition: max-width 0.3s ease-in-out 0.1s, opacity 0.2s ease-in-out 0.1s; }
+    .whatsapp-float:hover .whatsapp-text { max-width: 200px; opacity: 1; }
+    @media (max-width: 768px) {
+      .whatsapp-float { width: 50px; height: 50px; bottom: 20px; left: 20px; padding-left: 12px; }
+      .whatsapp-icon { font-size: 26px; }
+      .whatsapp-float:hover { width: 50px; }
+      .whatsapp-float:hover .whatsapp-text { max-width: 0; opacity: 0; }
+    }
+  </style>
+</head>
+
+<body class="font-poppins bg-dark-bg text-primary-text">
+  <!-- NAVBAR -->
+  <header class="header fixed w-full top-0 z-50 py-4">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <a href="#home" class="flex items-center space-x-3 cursor-pointer">
+        <!-- Logo Baru untuk Header -->
+        <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" fill="currentColor" fill-opacity="0.1"/>
+          <path d="M16.5 9.5L7.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 22V12L2 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M22 7L12 12L12 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7.5 9.5L16.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 7L7.5 9.5L12 7L16.5 9.5L22 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="logo text-xl font-bold company-name-glow">
+          Adrise<span class="text-accent-logo">.</span>
+        </div>
+      </a>
+      
+      <!-- Desktop Nav Links -->
+      <nav class="desktop-nav-links hidden md:flex items-center space-x-8 text-secondary-text font-semibold">
+        <a href="#home" class="active">Beranda</a>
+        <a href="#services">Layanan</a>
+        <a href="produk.html">Produk</a>
+        <a href="#about">Tentang</a>
+        <a href="#contact">Kontak</a>
+      </nav>
+      
+      <!-- Cart Icon -->
+      <div class="flex items-center gap-4">
+        <a href="cart.html" class="cart-icon text-primary-text flex items-center space-x-2">
+            <i class="fas fa-shopping-cart text-xl hover:text-gray-400 transition-colors"></i>
+            <span id="cart-count" class="bg-primary-text text-dark-bg text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="nav-toggle" class="mobile-menu-btn text-white text-2xl md:hidden">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+  
+  <!-- MOBILE NAVBAR (NEW) -->
+  <nav class="nav" id="nav-menu">
+    <div class="nav__content">
+      <i class="fas fa-times nav__close" id="nav-close"></i>
+      
+      <div class="nav__company">
+          <!-- Logo Baru di dalam menu -->
+          <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" fill="currentColor" fill-opacity="0.1"/>
+              <path d="M16.5 9.5L7.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 22V12L2 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M22 7L12 12L12 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7.5 9.5L16.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 7L7.5 9.5L12 7L16.5 9.5L22 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          <span class="nav__logo_name">Adrise.</span>
+      </div>
+
+      <ul class="nav__list">
+        <li class="nav__item"><a href="#home" class="nav__link active">Beranda</a></li>
+        <li class="nav__item"><a href="#services" class="nav__link">Layanan</a></li>
+        <li class="nav__item"><a href="produk.html" class="nav__link">Produk</a></li>
+        <li class="nav__item"><a href="#about" class="nav__link">Tentang</a></li>
+        <li class="nav__item"><a href="#contact" class="nav__link">Kontak</a></li>
+      </ul>
+      
+      <div class="nav__social">
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-slider">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1770')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1770')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=1770')"></div>
+            <div class="slide-overlay"></div>
+        </div>
+        
+        <div class="hero-content container mx-auto px-4 text-center flex flex-col justify-center h-full">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white h-24 md:h-32">
+                <span id="typing-text"></span><span class="typing-cursor"></span>
+            </h1>
+            <p class="text-lg md:text-xl text-secondary-text mb-10 max-w-2xl mx-auto">
+                Adrise bantu bisnismu naik level lewat strategi digital yang tepat sasaran. Tingkatkan penjualan dan brand awareness dengan solusi kreatif kami.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="produk.html" class="primary-btn py-3 px-8 rounded-lg font-bold text-lg inline-block">
+                    <i class="fas fa-rocket mr-2"></i>Jelajahi Layanan
+                </a>
+                <a href="#contact" class="secondary-btn py-3 px-8 rounded-lg font-bold text-lg inline-block">
+                    <i class="fas fa-envelope mr-2"></i>Hubungi Kami
+                </a>
+            </div>
+        </div>
+        <div class="slider-dots"></div>
+    </section>
+
+    <!-- LAYANAN KAMI -->
+    <section class="py-20 bg-primary-bg" id="services">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16 fade-in-up">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Layanan Profesional Kami</h2>
+          <p class="text-secondary-text max-w-2xl mx-auto">Solusi digital terintegrasi untuk mendorong pertumbuhan bisnis Anda.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="card-hover rounded-xl p-8 text-center fade-in-up">
+            <div class="mb-4 text-gray-400 text-4xl"><i class="fas fa-video"></i></div>
+            <h4 class="text-xl font-bold mb-2 text-primary-text">Produksi Video</h4>
+            <p class="text-secondary-text">Konten sinematik untuk media sosial, iklan, dan profil perusahaan.</p>
+          </div>
+          <div class="card-hover rounded-xl p-8 text-center fade-in-up" style="transition-delay: 150ms;">
+            <div class="mb-4 text-gray-400 text-4xl"><i class="fas fa-bullhorn"></i></div>
+            <h4 class="text-xl font-bold mb-2 text-primary-text">Iklan Digital</h4>
+            <p class="text-secondary-text">Kampanye efektif di Google, Facebook, Instagram, dan TikTok.</p>
+          </div>
+          <div class="card-hover rounded-xl p-8 text-center fade-in-up" style="transition-delay: 300ms;">
+            <div class="mb-4 text-gray-400 text-4xl"><i class="fas fa-palette"></i></div>
+            <h4 class="text-xl font-bold mb-2 text-primary-text">Desain & Branding</h4>
+            <p class="text-secondary-text">Identitas visual yang kuat mulai dari logo hingga materi pemasaran.</p>
+          </div>
+          <div class="card-hover rounded-xl p-8 text-center fade-in-up" style="transition-delay: 450ms;">
+            <div class="mb-4 text-gray-400 text-4xl"><i class="fas fa-code"></i></div>
+            <h4 class="text-xl font-bold mb-2 text-primary-text">Pengembangan Web</h4>
+            <p class="text-secondary-text">Website modern, responsif, dan fungsional untuk bisnis Anda.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUK UNGGULAN -->
+    <section class="py-20 bg-dark-bg" id="products">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Produk Unggulan Kami</h2>
+                <p class="text-secondary-text max-w-2xl mx-auto">Paket solusi siap pakai yang dirancang untuk memberikan hasil maksimal.</p>
+            </div>
+            <div id="featured-products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </div>
+    </section>
+
+    <!-- TENTANG KAMI -->
+    <section class="py-20 bg-primary-bg" id="about">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center gap-12">
+          <div class="md:w-1/2 fade-in-up">
+            <img src="https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?auto=format&fit=crop&q=80&w=1770" alt="Tim Adrise sedang berdiskusi" class="rounded-xl shadow-2xl w-full">
+          </div>
+          <div class="md:w-1/2 fade-in-up" style="transition-delay: 200ms;">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Tentang Adrise</h2>
+            <p class="text-secondary-text mb-4">Adrise adalah agensi digital kreatif yang bersemangat membantu brand bertumbuh. Kami percaya kombinasi strategi cerdas, desain memikat, dan teknologi terdepan adalah kunci kesuksesan di era digital.</p>
+            <p class="text-secondary-text mb-8">Dengan tim profesional, kami hadir sebagai partner strategis Anda untuk mencapai tujuan pemasaran digital dengan pendekatan inovatif dan terukur.</p>
+            <a href="#" class="primary-btn py-3 px-8 rounded-lg font-bold text-lg inline-block"><i class="fas fa-info-circle mr-2"></i>Pelajari Lanjut</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAK KAMI -->
+    <section class="py-20 bg-dark-bg" id="contact">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16 fade-in-up">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Hubungi Kami</h2>
+          <p class="text-secondary-text max-w-2xl mx-auto">Siap untuk memulai proyek Anda? Kirimkan pesan kepada kami!</p>
+        </div>
+        <div class="bg-primary-bg rounded-xl shadow-2xl p-8 md:p-12">
+            <div class="flex flex-col md:flex-row gap-8 md:gap-16">
+                <form class="w-full md:w-1/2 space-y-6 fade-in-up">
+                  <h3 class="text-2xl font-bold text-primary-text mb-4">Kirim Pesan</h3>
+                  <div><input type="text" placeholder="Nama Anda" class="w-full px-6 py-4 bg-dark-bg rounded-lg border border-border-color focus:outline-none focus:ring-2 focus:ring-white transition-all" required/></div>
+                  <div><input type="email" placeholder="Email Anda" class="w-full px-6 py-4 bg-dark-bg rounded-lg border border-border-color focus:outline-none focus:ring-2 focus:ring-white transition-all" required/></div>
+                  <div><textarea placeholder="Pesan Anda..." rows="5" class="w-full px-6 py-4 bg-dark-bg rounded-lg border border-border-color focus:outline-none focus:ring-2 focus:ring-white transition-all" required></textarea></div>
+                  <button type="submit" class="primary-btn w-full font-bold py-4 px-8 rounded-lg text-lg">Kirim</button>
+                </form>
+                <div class="w-full md:w-1/2 fade-in-up" style="transition-delay: 200ms;">
+                    <h3 class="text-2xl font-bold text-primary-text mb-4">Lokasi Kami</h3>
+                    <div class="w-full h-64 md:h-full rounded-lg overflow-hidden">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.314182207887!2d112.60827627501472!3d-7.966446792060435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7882865d0698a9%3A0x3dff7440a50a9c01!2sUniversitas%20Brawijaya!5e0!3m2!1sid!2sid!4v1719137435264!5m2!1sid!2sid" class="w-full h-full border-0" allowfullscreen="" loading="lazy" style="filter: invert(90%) grayscale(80%);" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-10 bg-dark-bg border-t border-border-color">
+    <div class="container mx-auto px-4 text-center text-secondary-text">
+      <p>&copy; <span id="copyright-year"></span> Adrise. All Rights Reserved.</p>
+      <div class="mt-4 flex justify-center space-x-6">
+        <a href="#" class="hover:text-primary-text transition-colors">Facebook</a>
+        <a href="#" class="hover:text-primary-text transition-colors">Instagram</a>
+        <a href="#" class="hover:text-primary-text transition-colors">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/6285777622950?text=Halo%2C%20saya%20tertarik%20dengan%20layanan%20Adrise." target="_blank" class="whatsapp-float" aria-label="Hubungi kami di WhatsApp">
+      <i class="fab fa-whatsapp whatsapp-icon"></i>
+      <span class="whatsapp-text">Hubungi di WhatsApp</span>
+  </a>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // --- NEW: Mobile Menu Logic ---
+      const navMenu = document.getElementById('nav-menu');
+      const navToggle = document.getElementById('nav-toggle');
+      const navClose = document.getElementById('nav-close');
+      const navLinks = document.querySelectorAll('.nav__link');
+
+      // Show Menu
+      if (navToggle) {
+        navToggle.addEventListener('click', () => {
+          navMenu.classList.add('show');
+        });
+      }
+
+      // Hide Menu
+      if (navClose) {
+        navClose.addEventListener('click', () => {
+          navMenu.classList.remove('show');
+        });
+      }
+      
+      // Hide Menu when a link is clicked
+      function linkAction() {
+        navMenu.classList.remove('show');
+      }
+      navLinks.forEach(n => n.addEventListener('click', linkAction));
+
+
+      // --- Data Produk ---
+      const masterProductList = [
+        { id: 1, nama: "Desain Grafis", harga: 350000, deskripsi: "Desain visual untuk kebutuhan promosi, branding, dan media sosial.", media: { type: 'image', src: 'assets/Desain Grafis.jpeg' }, kategori: 'layanan' },
+        { id: 5, nama: "Branding & Rebranding", harga: 450000, deskripsi: "Bangun atau segarkan identitas brand dengan pendekatan kreatif.", media: { type: 'image', src: 'assets/branding.jpeg' }, kategori: 'layanan' },
+        { id: 7, nama: "Iklan Tradisional", harga: 200000, deskripsi: "Promosi menggunakan media konvensional yang tetap efektif.", media: { type: 'image', src: 'assets/iklan tradisional.jpeg' }, kategori: 'layanan' },
+        { id: 8, nama: "Copywriting", harga: 300000, deskripsi: "Tulis konten promosi yang menarik, persuasif, dan tepat sasaran.", media: { type: 'image', src: 'assets/copywriting.jpeg' }, kategori: 'layanan' },
+        { id: 10, nama: "Voice Over", harga: 500000, deskripsi: "Pengisi suara profesional untuk video, iklan, atau presentasi.", media: { type: 'image', src: 'assets/voice over.jpeg' }, kategori: 'layanan' },
+        { id: 2, nama: "Motion Graphics", harga: 900000, deskripsi: "Animasi bergerak untuk memperkuat pesan visual dan branding.", media: { type: 'video', src: 'assets/motion-graphic.mp4' }, kategori: 'produk unggulan' },
+        { id: 3, nama: "Pembuatan Video", harga: 1000000, deskripsi: "Produksi video profesional untuk iklan, profil, atau kampanye.", media: { type: 'video', src: 'assets/pembuatan-video.mp4' }, kategori: 'produk unggulan' },
+        { id: 4, nama: "Manajemen Sosmed", harga: 450000, deskripsi: "Kelola akun media sosial secara konsisten dan strategis.", media: { type: 'image', src: 'assets/sosmed.jpeg' }, kategori: 'produk unggulan' },
+        { id: 6, nama: "Iklan Digital", harga: 800000, deskripsi: "Strategi iklan online untuk menjangkau audiens secara maksimal.", media: { type: 'image', src: 'assets/Iklan Digital.jpeg' }, kategori: 'produk unggulan' },
+        { id: 9, nama: "Iklan Youtube", harga: 750000, deskripsi: "Buat dan pasang iklan video untuk menjangkau pemirsa YouTube.", media: { type: 'video', src: 'assets/iklan youtube.mp4' }, kategori: 'produk unggulan' }
+      ];
+
+      // --- Setup ---
+      const cartCount = document.getElementById("cart-count");
+      const header = document.querySelector('.header');
+      const featuredProductsGrid = document.getElementById('featured-products-grid');
+
+      // --- Cart Count ---
+      const updateCartBadge = () => {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const totalItems = cart.reduce((acc, item) => acc + (item.jumlah || 1), 0);
+        cartCount.textContent = totalItems;
+      };
+      updateCartBadge();
+      
+      // --- Header Scroll Effect ---
+      window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+      });
+      
+      // --- On Scroll Animation Observer ---
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      const observeElements = () => {
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+      }
+      
+      // --- Render Featured Products ---
+      const renderFeaturedProducts = () => {
+          if (!featuredProductsGrid) return;
+          const featuredProducts = masterProductList.filter(p => p.kategori === 'produk unggulan').slice(0, 3);
+          featuredProductsGrid.innerHTML = "";
+          featuredProducts.forEach((product, index) => {
+              const card = document.createElement('div');
+              card.className = "card-hover rounded-xl overflow-hidden fade-in-up flex flex-col";
+              card.style.transitionDelay = `${index * 200}ms`;
+              let mediaElement = product.media.type === 'video'
+                  ? `<video src="${product.media.src}" autoplay loop muted playsinline class="w-full h-56 object-cover" onerror="this.style.display='none'"></video>`
+                  : `<img src="${product.media.src}" alt="${product.nama}" class="w-full h-56 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x560/1F1F1F/A0A0A0?text=Asset+not+found';">`;
+              card.innerHTML = `
+                  <div class="h-56 bg-dark-bg">${mediaElement}</div>
+                  <div class="p-6 flex flex-col flex-grow">
+                      <h3 class="text-xl font-bold mb-2 text-primary-text">${product.nama}</h3>
+                      <p class="text-secondary-text mb-4 flex-grow">${product.deskripsi.substring(0, 100)}...</p>
+                      <a href="detail-produk.html?id=${product.id}" class="font-semibold text-primary-text hover:text-gray-300 transition-colors mt-auto">Pelajari Lebih Lanjut →</a>
+                  </div>`;
+              featuredProductsGrid.appendChild(card);
+          });
+      };
+      
+      // --- Hero Slider ---
+      const slides = document.querySelectorAll('.hero-slider .slide');
+      const dotsContainer = document.querySelector('.slider-dots');
+      if (slides.length > 0) {
+        let currentSlide = 0;
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.classList.add('slider-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => showSlide(i));
+            dotsContainer.appendChild(dot);
+        });
+        const dots = document.querySelectorAll('.slider-dot');
+        const showSlide = (index) => {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        };
+        setInterval(() => showSlide((currentSlide + 1) % slides.length), 5000);
+      }
+
+      // --- Typing Animation ---
+      const typingTextEl = document.getElementById('typing-text');
+      if (typingTextEl) {
+        const texts = ["Transformasi Digital untuk Bisnis Anda", "Strategi Kreatif, Hasil Nyata", "Tingkatkan Brand Anda Bersama Kami"];
+        let textIndex = 0, charIndex = 0, isDeleting = false;
+        function type() {
+          const currentText = texts[textIndex];
+          if (isDeleting) {
+            typingTextEl.textContent = currentText.substring(0, charIndex - 1);
+            charIndex--;
+          } else {
+            typingTextEl.textContent = currentText.substring(0, charIndex + 1);
+            charIndex++;
+          }
+          if (!isDeleting && charIndex === currentText.length) {
+            setTimeout(() => isDeleting = true, 2000);
+          } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+          }
+          setTimeout(type, isDeleting ? 50 : 100);
+        }
+        type();
+      }
+      
+      // --- Initial Page Load Functions ---
+      document.getElementById('copyright-year').textContent = new Date().getFullYear();
+      renderFeaturedProducts();
+      observeElements();
+    });
+  </script>
+</body>
+</html>

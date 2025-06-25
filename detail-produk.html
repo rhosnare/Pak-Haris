@@ -3,283 +3,298 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Detail Produk | Adrise</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/main.css">
-  <style>
-    .detail-page {
-      padding-top: 6rem;
-      padding-bottom: 4rem;
-      background-color: #121212;
-      color: #eee;
-      font-family: 'Poppins', sans-serif;
-    }
+  <meta name="description" content="Detail produk dan layanan digital dari Adrise.">
+  <title>Detail Produk | Adrise Digital Creative Agency</title>
 
-    .detail-container {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 3rem;
-      max-width: 1200px;
-      margin: auto;
-      padding: 2rem;
-    }
-
-    .detail-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      width: 100%;
-      justify-content: center;
-    }
-
-    .detail-image {
-      width: 480px;
-      height: 320px;
-      object-fit: cover;
-      border-radius: 16px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
-    }
-
-
-    .detail-info {
-      flex: 1;
-      min-width: 280px;
-      max-width: 600px;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    .detail-info h1 {
-      color: #f9a825;
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .detail-info .harga {
-      font-weight: bold;
-      font-size: 1.2rem;
-      color: #ffd54f;
-    }
-
-    .detail-info .deskripsi {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #ccc;
-    }
-
-    .btn-cart {
-      background-color: #f9a825;
-      color: #121212;
-      border: none;
-      padding: 0.8rem 1.6rem;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      align-self: flex-start;
-    }
-
-    .btn-cart:hover {
-      background-color: #ffd54f;
-      box-shadow: 0 0 10px rgba(255, 213, 79, 0.5);
-    }
-
-    @media (max-width: 768px) {
-      .detail-wrapper {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      .detail-info {
-        align-items: center;
-      }
-
-      .btn-cart {
-        align-self: center;
-      }
-    }
-  </style>
-  <link rel="icon" href="assets/icons/favicon.png">
+  <!-- PERUBAHAN: Menyesuaikan Favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Cpath d='M25.45,55.5s-2.3-25.5,13.4-39.7c15.2-13.8,30.3,1.1,20.2,21.1C49,57.1,25.45,55.5,25.45,55.5Z' fill='%233b82f6'/%3E%3Cpath d='M20.45,55.5s-2.3-19,10.1-29.8c12-10.4,22.8,0.8,15.2,15.9C38.25,52,20.45,55.5,20.45,55.5Z' fill='white' fill-opacity='0.9'/%3E%3Cpath d='M15.45,55.5s-2.3-12.6,6.8-20c8.8-7,15.3,0.5,10.1,10.6C27.55,51.4,15.45,55.5,15.45,55.5Z' fill='white' fill-opacity='0.7'/%3E%3C/svg%3E" type="image/svg+xml">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Tailwind Config -->
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    console.log("✅ detail.js aktif (inline)");
-    const container = document.getElementById("detailContainer");
-    const cartCount = document.getElementById("cart-count");
-
-    const produkList = [
-      {
-        id: 1,
-        nama: "Desain Grafis",
-        harga: 350000,
-        deskripsi: "Desain visual kreatif untuk promosi dan branding digital.",
-        gambar: "assets/Desain Grafis.jpeg"
-      },
-      {
-        id: 2,
-        nama: "Motion Graphics",
-        harga: 900000,
-        deskripsi: "Animasi grafis yang dinamis untuk memperkuat konten digitalmu.",
-        gambar: "assets/motion-graphic.mp4"
-      },
-      {
-        id: 3,
-        nama: "Pembuatan Video",
-        harga: 1000000,
-        deskripsi: "Video profesional untuk kampanye, profil brand, atau promosi.",
-        gambar: "assets/pembuatan-video.mp4"
-      },
-      {
-        id: 4,
-        nama: "Manajemen Sosmed",
-        harga: 450000,
-        deskripsi: "Atur & aktifkan sosial media-mu dengan strategi yang tepat.",
-        gambar: "assets/sosmed.jpeg"
-      },
-      {
-        id: 5,
-        nama: "Branding & Rebranding",
-        harga: 450000,
-        deskripsi: "Bentuk ulang citra brand-mu agar lebih menonjol dan solid.",
-        gambar: "assets/branding.jpeg"
-      },
-      {
-        id: 6,
-        nama: "Iklan Digital",
-        harga: 800000,
-        deskripsi: "Kampanye iklan digital untuk jangkauan yang lebih luas.",
-        gambar: "assets/Iklan Digital.jpeg"
-      },
-      {
-        id: 7,
-        nama: "Iklan Tradisional",
-        harga: 200000,
-        deskripsi: "Promosi offline via media konvensional yang tetap efektif.",
-        gambar: "assets/iklan tradisional.jpeg"
-      },
-      {
-        id: 8,
-        nama: "Copywriting",
-        harga: 300000,
-        deskripsi: "Teks iklan yang kuat, menarik, dan meningkatkan konversi.",
-        gambar: "assets/copywriting.jpeg"
-      },
-      {
-        id: 9,
-        nama: "Iklan Youtube",
-        harga: 750000,
-        deskripsi: "Video iklan kreatif untuk menjangkau audiens YouTube.",
-        gambar: "assets/iklan youtube.mp4"
-      },
-      {
-        id: 10,
-        nama: "Voice Over",
-        harga: 500000,
-        deskripsi: "Suara profesional untuk video, iklan, atau presentasi.",
-        gambar: "assets/voice over.jpeg"
-      }
-    ];
-
-
-    function getProductId() {
-      const params = new URLSearchParams(window.location.search);
-      return parseInt(params.get("id"));
-    }
-
-    function renderDetail(produk) {
-      const isVideo = produk.gambar.endsWith(".mp4");
-
-      container.innerHTML = `
-        <div class="detail-wrapper">
-          ${isVideo
-            ? `<video class="detail-image" autoplay muted loop>
-                <source src="${produk.gambar}" type="video/mp4" />
-                Browser tidak mendukung video.
-              </video>`
-            : `<img src="${produk.gambar}" alt="${produk.nama}" class="detail-image">`
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'dark-bg': '#000000',
+            'primary-bg': '#111111',
+            'secondary-bg': '#1F1F1F',
+            'primary-text': '#FFFFFF',
+            'secondary-text': '#A0A0A0',
+            'accent-logo': '#3b82f6',
+            'border-color': 'rgba(255, 255, 255, 0.1)',
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif']
           }
-          <div class="detail-info">
-            <h1>${produk.nama}</h1>
-            <p class="harga">Rp ${produk.harga.toLocaleString("id-ID")}</p>
-            <p class="deskripsi">${produk.deskripsi}</p>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-              <button id="btnAddToCart" class="btn-cart">+ Tambah ke Keranjang</button>
-              <button id="btnBack" class="btn-cart" style="background-color: transparent; color: #f9a825; border: 2px solid #f9a825;">
-                ← Kembali ke Produk
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-
-      document.getElementById("btnAddToCart").addEventListener("click", () => {
-        tambahKeKeranjang(produk);
-      });
-      document.getElementById("btnBack").addEventListener("click", () => {
-    window.location.href = "produk.html";
-      });
-    }
-
-
-    function tambahKeKeranjang(produk) {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const index = cart.findIndex(item => item.id === produk.id);
-      if (index > -1) {
-        cart[index].jumlah += 1;
-      } else {
-        cart.push({ ...produk, jumlah: 1 });
+        }
       }
-      localStorage.setItem("cart", JSON.stringify(cart));
-      alert("Produk berhasil ditambahkan ke keranjang!");
-      updateCartCount();
+    }
+  </script>
+  
+  <!-- PERUBAHAN: Menyesuaikan Custom CSS untuk Navbar -->
+  <style>
+    body { font-family: 'Poppins', sans-serif; background-color: #000000; color: #FFFFFF; scroll-behavior: smooth; }
+    .header { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(12px); transition: all 0.3s ease; }
+    .header.scrolled { background: rgba(10, 10, 10, 0.85); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); }
+    .company-name-glow { text-shadow: 0 0 8px rgba(59, 130, 246, 0.8), 0 0 12px rgba(59, 130, 246, 0.6); animation: glow-animation 2s infinite alternate; }
+    @keyframes glow-animation { from { text-shadow: 0 0 8px rgba(59, 130, 246, 0.7), 0 0 12px rgba(59, 130, 246, 0.5); } to { text-shadow: 0 0 12px rgba(59, 130, 246, 0.9), 0 0 20px rgba(59, 130, 246, 0.7); } }
+    
+    /* Mobile Navbar Styles (Konsisten dengan cart.html) */
+    @media screen and (max-width: 768px) {
+      .nav { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background-color: #111111; z-index: 1000; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1); display: grid; grid-template-rows: max-content 1fr max-content; row-gap: 2rem; padding: 2.5rem 0; }
+      .nav.show { left: 0; }
+      .nav__content { max-width: 1024px; display: grid; grid-template-rows: max-content 1fr max-content; row-gap: 3rem; margin-left: 1.5rem; margin-right: 1.5rem; }
+      .nav__close { position: absolute; top: 1rem; right: 1.5rem; font-size: 1.75rem; cursor: pointer; color: #FFFFFF; }
+      .nav__company { display: flex; align-items: center; gap: 0.75rem; }
+      .nav__logo_name { font-size: 1.25rem; font-weight: 700; color: #FFFFFF; }
+      .nav__list { display: flex; flex-direction: column; align-items: center; gap: 2.5rem; }
+      .nav__link { color: #A0A0A0; font-weight: 600; transition: color 0.3s; }
+      .nav__link:hover, .nav__link.active { color: #FFFFFF; }
+      .nav__social { display: flex; justify-content: center; gap: 1.5rem; }
+      .nav__social a { font-size: 1.5rem; color: #FFFFFF; transition: color 0.3s; }
+      .nav__social a:hover { color: #3b82f6; }
+      .desktop-nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
+    
+    /* Desktop Navbar */
+    @media screen and (min-width: 769px) {
+      .nav, .mobile-menu-btn { display: none; }
+      .desktop-nav-links { display: flex; }
+      .desktop-nav-links a { position: relative; transition: color 0.3s ease; }
+      .desktop-nav-links a::after { content: ""; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background-color: #FFFFFF; transition: width 0.3s ease; }
+      .desktop-nav-links a:hover, .desktop-nav-links a.active { color: #FFFFFF; }
+      .desktop-nav-links a:hover::after, .desktop-nav-links a.active::after { width: 100%; }
     }
 
-    function updateCartCount() {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const total = cart.reduce((sum, item) => sum + item.jumlah, 0);
-      cartCount.textContent = total;
-    }
-
-    const id = getProductId();
-    console.log("ID dari URL:", id);
-    const produk = produkList.find(p => p.id == id);
-    if (produk) {
-      renderDetail(produk);
-      updateCartCount();
-    } else {
-      container.innerHTML = `<p style="padding:2rem;text-align:center;">Produk tidak ditemukan.</p>`;
-    }
-  });
-</script>
+    /* Page Specific Styles */
+    .fade-in-up { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1); }
+    .fade-in-up.animate { opacity: 1; transform: translateY(0); }
+    .notification-modal { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 200; }
+    .notification-modal.show { top: 20px; }
+  </style>
 </head>
-<body>
-  <header class="navbar">
-    <div class="container navbar-content">
-      <div class="logo">Adrise<span>.</span></div>
-      <nav class="nav-links">
-        <a href="index.html">Beranda</a>
-        <a href="produk.html">Produk</a>
-        <a href="cart.html" class="cart-icon">🛒<span id="cart-count">0</span></a>
+
+<body class="font-poppins bg-dark-bg text-primary-text">
+
+  <!-- PERUBAHAN: Mengganti struktur NAVBAR (header & nav) -->
+  <header class="header fixed w-full top-0 z-50 py-4">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <a href="homepage.html" class="flex items-center space-x-3 cursor-pointer">
+        <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" fill="currentColor" fill-opacity="0.1"/><path d="M16.5 9.5L7.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 22V12L2 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 7L12 12L12 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.5 9.5L16.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 7L7.5 9.5L12 7L16.5 9.5L22 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="logo text-xl font-bold company-name-glow">Adrise<span class="text-accent-logo">.</span></div>
+      </a>
+      
+      <nav class="desktop-nav-links hidden md:flex items-center space-x-8 text-secondary-text font-semibold">
+        <a href="homepage.html">Beranda</a>
+        <a href="homepage.html#services">Layanan</a>
+        <a href="produk.html" class="active">Produk</a>
+        <a href="homepage.html#about">Tentang</a>
+        <a href="homepage.html#contact">Kontak</a>
       </nav>
+      
+      <div class="flex items-center gap-4">
+        <a href="cart.html" class="cart-icon text-primary-text flex items-center space-x-2">
+            <i class="fas fa-shopping-cart text-xl hover:text-gray-400 transition-colors"></i>
+            <span id="cart-count" class="bg-primary-text text-dark-bg text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+        </a>
+        <button id="nav-toggle" class="mobile-menu-btn text-white text-2xl md:hidden"><i class="fas fa-bars"></i></button>
+      </div>
     </div>
   </header>
 
-  <main class="detail-page">
-    <div class="container detail-container" id="detailContainer">
-      <!-- Konten produk akan dirender oleh JS -->
+  <nav class="nav" id="nav-menu">
+    <div class="nav__content">
+      <i class="fas fa-times nav__close" id="nav-close"></i>
+      <div class="nav__company">
+          <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" fill="currentColor" fill-opacity="0.1"/><path d="M16.5 9.5L7.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 22V12L2 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 7L12 12L12 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.5 9.5L16.5 14.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 7L7.5 9.5L12 7L16.5 9.5L22 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="nav__logo_name">Adrise.</span>
+      </div>
+      <ul class="nav__list">
+        <li class="nav__item"><a href="homepage.html" class="nav__link">Beranda</a></li>
+        <li class="nav__item"><a href="homepage.html#services" class="nav__link">Layanan</a></li>
+        <li class="nav__item"><a href="produk.html" class="nav__link active">Produk</a></li>
+        <li class="nav__item"><a href="homepage.html#about" class="nav__link">Tentang</a></li>
+        <li class="nav__item"><a href="homepage.html#contact" class="nav__link">Kontak</a></li>
+      </ul>
+      <div class="nav__social">
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT (Tidak Diubah) -->
+  <main class="min-h-screen pt-32 pb-20 bg-primary-bg">
+    <div id="detail-container" class="container mx-auto px-4">
+        <!-- Konten detail produk akan dirender oleh JavaScript di sini -->
     </div>
   </main>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Adrise. All rights reserved.</p>
+  <!-- FOOTER (Tidak Diubah) -->
+  <footer class="py-10 bg-dark-bg border-t border-border-color">
+    <div class="container mx-auto px-4 text-center text-secondary-text">
+      <p>&copy; <span id="copyright-year"></span> Adrise. All Rights Reserved.</p>
     </div>
   </footer>
+
+  <!-- Modal Notifikasi -->
+  <div id="notification-modal" class="notification-modal bg-green-500 text-white py-3 px-6 rounded-lg shadow-lg">
+      <p id="notification-message">Item berhasil ditambahkan!</p>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // --- PERUBAHAN: Menyesuaikan Logika Navbar ---
+      const navMenu = document.getElementById('nav-menu');
+      const navToggle = document.getElementById('nav-toggle');
+      const navClose = document.getElementById('nav-close');
+      const navLinkItems = document.querySelectorAll('.nav__link');
+
+      if (navToggle) {
+          navToggle.addEventListener('click', () => navMenu.classList.add('show'));
+      }
+      if (navClose) {
+          navClose.addEventListener('click', () => navMenu.classList.remove('show'));
+      }
+      navLinkItems.forEach(n => n.addEventListener('click', () => navMenu.classList.remove('show')));
+
+      const header = document.querySelector('.header');
+      window.addEventListener('scroll', () => {
+          header.classList.toggle('scrolled', window.scrollY > 50);
+      });
+      document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+      // --- Logika Detail Produk (Tidak Diubah) ---
+      const masterProductList = [
+        { id: 1, nama: "Desain Grafis", harga: 350000, deskripsi: "Desain visual untuk kebutuhan promosi, branding, dan media sosial. Kami menciptakan identitas visual yang kuat dan menarik untuk memastikan brand Anda menonjol di tengah persaingan.", media: { type: 'image', src: 'assets/Desain Grafis.jpeg' }, kategori: 'layanan' },
+        { id: 5, nama: "Branding & Rebranding", harga: 450000, deskripsi: "Bangun atau segarkan identitas brand dengan pendekatan kreatif. Layanan ini mencakup pembuatan logo, palet warna, tipografi, dan panduan gaya visual yang komprehensif.", media: { type: 'image', src: 'assets/branding.jpeg' }, kategori: 'layanan' },
+        { id: 7, nama: "Iklan Tradisional", harga: 200000, deskripsi: "Promosi menggunakan media konvensional yang tetap efektif seperti brosur, pamflet, dan spanduk untuk menjangkau audiens lokal secara langsung.", media: { type: 'image', src: 'assets/iklan tradisional.jpeg' }, kategori: 'layanan' },
+        { id: 8, nama: "Copywriting", harga: 300000, deskripsi: "Tulis konten promosi yang menarik, persuasif, dan tepat sasaran. Dari tagline hingga konten website, kami pastikan setiap kata bekerja untuk Anda.", media: { type: 'image', src: 'assets/copywriting.jpeg' }, kategori: 'layanan' },
+        { id: 10, nama: "Voice Over", harga: 500000, deskripsi: "Pengisi suara profesional untuk video, iklan, atau presentasi. Berikan sentuhan audio berkualitas tinggi pada proyek multimedia Anda.", media: { type: 'image', src: 'assets/voice over.jpeg' }, kategori: 'layanan' },
+        { id: 2, nama: "Motion Graphics", harga: 900000, deskripsi: "Animasi bergerak untuk memperkuat pesan visual dan branding digital. Ideal untuk intro video, iklan, atau konten media sosial yang dinamis.", media: { type: 'video', src: 'assets/motion-graphic.mp4' }, kategori: 'produk unggulan' },
+        { id: 3, nama: "Pembuatan Video", harga: 1000000, deskripsi: "Produksi video profesional untuk iklan, profil, atau kampanye digital. Kami menangani semua tahap dari pra-produksi hingga pasca-produksi.", media: { type: 'video', src: 'assets/pembuatan-video.mp4' }, kategori: 'produk unggulan' },
+        { id: 4, nama: "Manajemen Sosmed", harga: 450000, deskripsi: "Kelola akun media sosial secara konsisten dan strategis. Kami membuat jadwal konten, berinteraksi dengan audiens, dan menganalisis performa.", media: { type: 'image', src: 'assets/sosmed.jpeg' }, kategori: 'produk unggulan' },
+        { id: 6, nama: "Iklan Digital", harga: 800000, deskripsi: "Strategi iklan online untuk menjangkau audiens secara maksimal di platform seperti Google, Facebook, dan Instagram.", media: { type: 'image', src: 'assets/Iklan Digital.jpeg' }, kategori: 'produk unggulan' },
+        { id: 9, nama: "Iklan Youtube", harga: 750000, deskripsi: "Buat dan pasang iklan video untuk menjangkau pemirsa YouTube. Termasuk penargetan audiens yang spesifik untuk hasil optimal.", media: { type: 'video', src: 'assets/iklan youtube.mp4' }, kategori: 'produk unggulan' }
+      ];
+      
+      const detailContainer = document.getElementById("detail-container");
+      const cartCountEl = document.getElementById("cart-count");
+      const notificationModal = document.getElementById("notification-modal");
+      const notificationMessage = document.getElementById("notification-message");
+
+      const getProductIdFromUrl = () => {
+          const params = new URLSearchParams(window.location.search);
+          return parseInt(params.get('id'));
+      };
+
+      const renderProductDetail = (product) => {
+        document.title = `${product.nama} | Adrise`;
+        let mediaElement = '';
+        if (product.media.type === 'video') {
+            mediaElement = `<video src="${product.media.src}" autoplay loop muted playsinline class="w-full h-full object-cover rounded-xl" onerror="this.parentElement.style.display='none'"></video>`;
+        } else {
+            mediaElement = `<img src="${product.media.src}" alt="${product.nama}" class="w-full h-full object-cover rounded-xl" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/1F1F1F/A0A0A0?text=Asset+not+found';">`;
+        }
+
+        detailContainer.innerHTML = `
+            <div class="fade-in-up bg-secondary-bg p-6 md:p-8 rounded-2xl">
+                <div class="flex flex-col lg:flex-row gap-8 md:gap-12">
+                    <div class="lg:w-1/2 xl:w-3/5 h-64 md:h-96 bg-dark-bg rounded-xl shadow-lg">
+                        ${mediaElement}
+                    </div>
+                    <div class="lg:w-1/2 xl:w-2/5 flex flex-col justify-center">
+                        <span class="text-sm font-semibold text-blue-400 uppercase tracking-wider mb-2">${product.kategori}</span>
+                        <h1 class="text-3xl md:text-4xl font-bold text-primary-text mb-4">${product.nama}</h1>
+                        <p class="text-2xl md:text-3xl font-bold text-blue-300 mb-6">Rp ${product.harga.toLocaleString("id-ID")}</p>
+                        <p class="text-secondary-text text-base leading-relaxed mb-8">${product.deskripsi}</p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button id="add-to-cart-detail-btn" class="w-full bg-white text-black font-bold py-3 px-6 rounded-lg transition-all hover:bg-gray-300 transform hover:scale-105 flex items-center justify-center gap-2">
+                                <i class="fas fa-cart-plus"></i>Tambah ke Keranjang
+                            </button>
+                            <a href="produk.html" class="w-full text-center border-2 border-border-color text-primary-text font-bold py-3 px-6 rounded-lg transition-all hover:bg-border-color transform hover:scale-105 flex items-center justify-center gap-2">
+                                <i class="fas fa-arrow-left"></i>Kembali
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('add-to-cart-detail-btn').addEventListener('click', () => {
+            addToCart(product.id);
+        });
+
+        setTimeout(() => {
+          const animatedEl = detailContainer.querySelector('.fade-in-up');
+          if (animatedEl) {
+            animatedEl.classList.add('animate');
+          }
+        }, 100);
+      };
+
+      const renderNotFound = () => {
+        detailContainer.innerHTML = `
+            <div class="text-center py-20 fade-in-up animate">
+                <h1 class="text-3xl font-bold mb-4">Oops! Produk Tidak Ditemukan</h1>
+                <p class="text-secondary-text mb-8">Produk yang Anda cari tidak ada atau mungkin telah dihapus.</p>
+                <a href="produk.html" class="bg-white text-black font-bold py-3 px-8 rounded-lg transition-all hover:bg-gray-300">
+                    Kembali ke Semua Produk
+                </a>
+            </div>
+        `;
+      };
+      
+      const addToCart = (productId) => {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const product = masterProductList.find(p => p.id === productId);
+        const existingItem = cart.find(item => item.id === productId);
+        if (existingItem) {
+          existingItem.jumlah = (existingItem.jumlah || 1) + 1;
+        } else {
+          cart.push({ ...product, jumlah: 1 });
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartBadge();
+        showNotification(`"${product.nama}" ditambahkan ke keranjang!`);
+      };
+      
+      const updateCartBadge = () => {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const totalItems = cart.reduce((acc, item) => acc + (item.jumlah || 1), 0);
+        cartCountEl.textContent = totalItems;
+      };
+
+      const showNotification = (message) => {
+          notificationMessage.textContent = message;
+          notificationModal.classList.add('show');
+          setTimeout(() => {
+              notificationModal.classList.remove('show');
+          }, 3000);
+      };
+      
+      // --- Main Logic ---
+      const productId = getProductIdFromUrl();
+      const product = masterProductList.find(p => p.id === productId);
+      
+      if (product) {
+          renderProductDetail(product);
+      } else {
+          renderNotFound();
+      }
+      updateCartBadge();
+    });
+  </script>
 </body>
 </html>
